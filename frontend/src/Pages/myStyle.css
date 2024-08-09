@@ -1,0 +1,198 @@
+@import url('https://fonts.googleapis.com/css2?family=Modern+Antiqua&display=swap');
+body{
+    margin:0;
+    padding: 0;
+    font-family: "Modern Antiqua", serif;
+    background: #EDEEF1;
+}
+
+.top-bar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 10px;
+    padding: 15px;
+    border-radius: 30px 0px;
+    position : sticky;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.nave-item ul{
+    list-style: none;
+    display: flex;
+    gap:20px;
+    cursor:pointer;
+}
+
+.a:hover{
+    color:rgb(0, 234, 255);
+    transform: scale(1.05);
+}
+
+.b{
+    margin: 0 -15px 0 -15px;
+}
+
+.tyre-logo{
+   display: flex;
+   margin-right: 0%;
+   transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.tyre-logo:hover{
+    transform: scale(1.05);
+    filter: brightness(1.5) drop-shadow(0 0 10px rgba(181, 249, 249, 0.8));
+}
+
+.home-body{
+    display: flex;
+    margin-top: 50px;
+    align-items: center;
+    justify-content: center;
+}
+
+/* .home-item {
+    
+} */
+
+.search-container {
+    position: relative;
+    margin-right: 0%;
+    display: inline-block;
+}
+
+.search-input {
+    padding-left: 40px;
+    height: 40px; 
+    width:200%;
+    border: 1px solid black;
+    border-radius: 40px;
+}
+
+
+.search-icon {
+    position: absolute;
+    left: 15px;
+    margin-top: 13px;
+    /*pointer-events: none;*/
+}
+
+.search-icon:hover {
+    scale: 120%;
+}
+
+/* For Profile */
+
+.dropDownProfile{
+    position: absolute;
+    top: 92%;
+    right: 1rem;
+    width: 140px;
+    height: 145px;
+    padding: 15px;
+    border-radius: 15px;
+    background-color: white;
+    border: 1px solid gray;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.9);
+}
+
+.dropDownProfile::before{
+    content: '';
+    position: absolute;
+    top: -0.7rem;
+    right: 1.1rem;
+    width: 20px;
+    height: 20px;
+    transform: rotate(45deg);
+    background-color: white;
+    border-left: 1px solid gray;
+    border-top: 1px solid gray;
+}
+
+.dropDownProfile ul{
+    list-style: none;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.dropDownProfile li{
+    margin-bottom: 20px;
+    cursor: pointer;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.dropDownProfile li:hover {
+    color:rgb(0, 234, 255);
+    transform: scale(1.05);
+}
+
+/* For Cart */
+
+.dropDownCart {
+    position: absolute;
+    top: 92%;
+    right: 8rem;
+    width: 140px;
+    height: 70px;
+    padding: 15px;
+    border-radius: 15px;
+    background-color: white;
+    border: 1px solid gray;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.9);
+}
+
+.dropDownCart::before {
+    content: '';
+    position: absolute;
+    top: -0.7rem;
+    right: 1.9rem;
+    width: 20px;
+    height: 20px;
+    transform: rotate(45deg);
+    background-color: white;
+    border-left: 1px solid gray;
+    border-top: 1px solid gray;
+}
+
+.dropDownCart ul {
+    list-style: none;
+    margin-top: 10px;
+}
+
+.dropDownCart li {
+    margin-bottom: 20px;
+    cursor: pointer;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.dropDownCart li:hover {
+    color: rgb(0, 234, 255);
+    transform: scale(1.05);
+}
+
+.cart-list{
+    margin-left: -25px;
+    margin-right: 10px;
+    scale: 140%;
+}
+
+.profile{
+    scale: 300%;
+    color: black;
+    margin-right: 20px;
+    margin-left: 20px;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.profile:hover{ 
+    transform: scale(1.05);
+}
+
+.profile-list{
+    margin-left: -25px;
+    margin-right: 10px;
+    scale: 140%;
+}
