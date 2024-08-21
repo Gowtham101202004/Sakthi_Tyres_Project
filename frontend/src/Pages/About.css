@@ -10,6 +10,10 @@
     margin-bottom: 50px;
 }
 
+.about-header img{
+    height: 150px;
+}
+
 .about-header h1 {
     font-size: 3em;
     margin-bottom: 10px;

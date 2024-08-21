@@ -1,11 +1,13 @@
 import React from 'react';
 import './About.css'; 
+import Tyre from '../assets/About/Sakthi-tyres.png'
 
 function About() {
   return (
     <div className='about-container'>
       <div className='about-header'>
-        <h1>Sakthi Tyres</h1>
+        {/* <h1>Sakthi Tyres</h1> */}
+        <img src={Tyre} alt='Sakthi Tyres'/>
         <p>We are dedicated to providing the best quality tires and exceptional service.</p>
       </div>
 

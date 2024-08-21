@@ -58,11 +58,38 @@
     box-shadow: rgba(88, 79, 79, 0.573) 0px 7px 29px 0px;
   }
   
+  .dealership-title{
+    margin-bottom: 5px;
+    font-size: 50px;
+    text-align:center;
+    color:black;
+  }
+
+  .dealership {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+  }
+  
+  .dealership img {
+    width: 150px; 
+    height: 100px;
+    object-fit: contain; 
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 8px;
+  }
+  
+  .dealership img:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+
   .tyre-quote-container {
-    background-image: url('../assets/Welcome/wide_image.jpg');
-    background-size: cover; 
-    background-position: center;
-    background-repeat: no-repeat;
+    background: linear-gradient(120deg, #0f0f0f, #383736, #88817e);
+    box-shadow: rgba(0, 0, 0, 0.573) 0px 7px 29px 0px;
     width: 98%;
     height: 500px;
     margin: 0 0 50px 15px;
@@ -79,3 +106,20 @@
 .tyre-quote img{
   border-radius: 15px;
 }
+
+.tyre-quote h1 {
+  position: absolute;
+  font-size: 45px;
+  width: 350px;
+  margin-top: 140px;
+  margin-left:1110px ;
+  color: black;
+}
+
+.tyre-quote h2{
+  font-size: 25px;
+  margin-top: 190px;
+  margin-left: 120px;
+}
+
+

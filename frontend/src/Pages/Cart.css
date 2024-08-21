@@ -1,0 +1,85 @@
+.cart-container{
+  margin: 20px;
+    color: black;
+    padding-bottom:20px ;
+    height: 600px;
+    overflow: scroll;
+}
+
+.cart-img {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10%;
+}
+
+
+.tire-box {
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+  
+.tire-box img {
+    max-width: 150px;
+    height: auto;
+    transition-duration: 0.3s; 
+}
+
+.tire-box img:hover {
+    transform: scale(1.09);
+}
+  
+.tire-box .content {
+    flex-grow: 1;
+    margin-left: 20px;
+    text-align: left;
+}
+  
+.tire-box h2 {
+    font-size: 1.7em;
+    margin-bottom: 10px;
+    margin-left: -70px;
+    color: #fd0101;
+}
+
+.tire-box h3 {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    color: #333;
+}
+  
+  .tire-box .price {
+    font-size: 1.1em;
+    color: #ff5722;
+    margin-bottom: 15px;
+  }
+  
+  .tire-box .buttons {
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+  }
+  
+  .tire-box .remove-from-cart {
+    padding: 10px 20px;
+    font-size: 0.9em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .tire-box .remove-from-cart {
+    background-color: #22ABF0;
+    color: #fff;
+  }
+  
+  .tire-box .remove-from-cart:hover {
+    background-color: #116c9a;
+  }
+  
