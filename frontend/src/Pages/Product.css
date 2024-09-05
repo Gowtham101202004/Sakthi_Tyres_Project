@@ -45,14 +45,13 @@
 
 .category-item:hover {
     background-color: #e6e6e6;
-    border-bottom: 3px solid black;
+    /* border-bottom: 3px solid black; */
     color: #333;
 }
 
 .category-item.active {
     background-color: black;
     color: #fff;
-    border-bottom: 3px solid black;
 }
 
 .category-icon {
@@ -68,6 +67,7 @@
 }
 
 .category-content {
+    width: 100%;
     margin-top: 20px;
     padding: 20px;
     background-color: #f0f0f0;
@@ -86,13 +86,22 @@
 
 .dropdown-container {
     display: flex;
-    justify-content:space-between;
     margin-bottom: 20px;
 }
 
-.dropdown-left, .dropdown-right {
+/* .dropdown-left, .dropdown-right {
     flex: 1;
     margin: 50px 10px;
+} */
+
+.dropdown-left{
+    margin:10px 0 20px 300px;
+    width:600px;
+}
+
+.dropdown-right{
+    margin:10px 0 20px -100px;
+    width:600px;
 }
 
 .dropdown-left label, .dropdown-right label {
@@ -114,12 +123,12 @@ select {
 }
 
 select:hover {
-    border-color: #ffaa00;
+    border-color: rgb(0, 234, 255);
 }
 
 select:focus {
-    border-color: #ffaa00;
-    box-shadow: 0 0 6px rgba(255, 170, 0, 0.5);
+    border-color: rgb(0, 234, 255);
+    box-shadow: 0 0 6px rgba(0, 234, 255, 0.5);
     outline: none;
 }
 
@@ -130,7 +139,7 @@ select:focus {
 .category-images {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 10%;
+    gap: 100px;
 }
 
 
@@ -138,8 +147,8 @@ select:focus {
     background-color: #ffffff;
     border-radius: 8px;
     padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin: 20px auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    margin: 0; 
     display: flex;
     align-items: center;
     justify-content: space-between;

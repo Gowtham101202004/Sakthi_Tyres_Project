@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import Michelin from '../assets/Welcome/michelin.jpg';
+import Michelin from '../assets/Welcome/michelin.png';
 import Bridgestone from '../assets/Welcome/bridgestone.jpg';
+import Apollo from '../assets/Welcome/Apollo.jpeg';
 import JK from '../assets/Welcome/jk.jpg';
 import Tyre from '../assets/Welcome/tyre2.png';
+import Apollo_Tyre from '../assets/Welcome/Apollo_tyre.jpg';
+
 
 import apollo from '../assets/Welcome/Dealers/apollo.png';
 import bridgestone from '../assets/Welcome/Dealers/bridgestone.png';
@@ -16,7 +19,7 @@ import './Welcome.css';
 function Welcome() {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const images = [Michelin, Bridgestone, JK];
+  const images = [Michelin, Bridgestone, JK, Apollo];
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -27,11 +30,15 @@ function Welcome() {
   }, [images.length]);
 
   return (
+    <>
     <div>
       <div className='slider-container'>
         <img src={images[currentIndex]} className='slider-image' alt='Tyres' />
       </div>
       <div className='grid-container'>
+        <div className='grid-item'>
+          <img src={Apollo_Tyre} className='tyre-image' alt='Tyres' />
+        </div>
         <div className='grid-item'>
           <img src={Michelin} className='tyre-image' alt='Tyres' />
         </div>
@@ -56,11 +63,23 @@ function Welcome() {
         <div className='tyre-quote'>
           <img src={Tyre} alt='tyre'/>
           <h1>BAD ATTITUDE</h1>
-          <br></br>
-          <h2>is like a flat tyre, <br></br>you can't move ahead <br></br>until it is changed.</h2>
+          <br />
+          <h2>is like a flat tyre, <br />you can't move ahead <br />until it is changed.</h2>
         </div>
       </div>
     </div>
+    <div className='maps'>
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3909.773075940275!2d77.2387215!3d11.496287200000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba921e116079619%3A0x6797b0fa55c4d973!2sSakthi%20Tyres!5e0!3m2!1sen!2sin!4v1725442343931!5m2!1sen!2sin"
+        width="60%"
+        height="450"
+        style={{ border: 0 }}
+        allowFullScreen=""
+        loading="lazy"
+        referrerPolicy="no-referrer-when-downgrade"
+      ></iframe>
+    </div>
+    </>
   );
 }
 

@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Cart.css';
+import Lottie from 'lottie-react';
+import empty from './empty.json';
 
 function Cart() {
   const [cart, setCart] = useState([]);
@@ -9,8 +11,10 @@ function Cart() {
     setCart(storedCart);
   }, []);
 
-  const removeFromCart = (id) => {
-    const updatedCart = cart.filter(item => item.id !== id);
+  const removeFromCart = (tyre_model, tyre_brand) => {
+    const updatedCart = cart.filter(item => 
+      !(item.tyre_model === tyre_model && item.tyre_brand === tyre_brand)
+    );
     setCart(updatedCart);
     localStorage.setItem('cart', JSON.stringify(updatedCart));
     alert('Item removed from cart');
@@ -20,17 +24,20 @@ function Cart() {
     <div className='cart-container'>
       <div className="cart-img"> 
         {cart.length === 0 ? (
-          <p>Your cart is empty</p>
+          <div className="cart-empty">
+            <Lottie className="empty" animationData={empty} loop={true}/>
+            <p>Your cart is empty</p>
+          </div>
         ) : (
           cart.map(item => (
-            <div className="tire-box" key={item.id}>
+            <div className="cart-tire-box" key={`${item.tyre_model}-${item.tyre_brand}`}>
               <img src={item.image} alt={item.tyre_model} />
               <div className="content">
                 <h2>{item.tyre_brand}</h2>
                 <h3>{item.tyre_model}</h3>
                 <p>{item.tyre_size}</p>
                 <div className="price">Price: {item.price}</div>
-                <button className="remove-from-cart" onClick={() => removeFromCart(item.id)}>Remove from Cart</button>
+                <button className="remove-from-cart" onClick={() => removeFromCart(item.tyre_model, item.tyre_brand)}>Remove from Cart</button>
               </div>
             </div>
           ))
@@ -41,3 +48,4 @@ function Cart() {
 }
 
 export default Cart;
+

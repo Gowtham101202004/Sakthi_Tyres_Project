@@ -4,6 +4,12 @@ import Cars from './Vehicle/Cars';
 import vehicleData from './Vehicle/VehicleData';
 import { useNavigate } from 'react-router-dom';
 
+//Company Logos
+import apollo from '../assets/Welcome/Dealers/apollo.png';
+import bridgestone from '../assets/Welcome/Dealers/bridgestone.png';
+import jk from '../assets/Welcome/Dealers/jk.png';
+
+
 import Car from '../assets/Product/car.svg';
 import Bike from '../assets/Product/bike.svg';
 import Truck from '../assets/Product/truck.svg';
@@ -63,40 +69,36 @@ function Product() {
   });
 
   const addToCart = (item) => {
-    const MakeToast = (msg) => {
-      toast.info(msg, {
-        position: "top-right",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        theme: "dark",
-        transition: Bounce,
-      });
-    };
-    
-    const MakeErrorToast = (msg) => {
-      toast.error(msg, {
-        position: "top-right",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        theme: "dark",
-        transition: Bounce,
-      });
-    };
+    const itemInCart = cart.find(cartItem => 
+      cartItem.tyre_model === item.tyre_model && cartItem.tyre_brand === item.tyre_brand
+    );
 
-    const itemInCart = cart.find(cartItem => cartItem.id === item.id);
     if (itemInCart) {
-      MakeErrorToast("The item already added to Cart");
+      toast.error("The item is already added to Cart", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "dark",
+        transition: Bounce,
+      });
     } else {
       const updatedCart = [...cart, item];
       setCart(updatedCart);
-      localStorage.setItem('cart', JSON.stringify(updatedCart)); // Save cart to localStorage
-      MakeToast("The item added to Cart");
+      localStorage.setItem('cart', JSON.stringify(updatedCart));
+
+      toast.info("The item has been added to Cart", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "dark",
+        transition: Bounce,
+      });
     }
   };
 
@@ -145,12 +147,17 @@ function Product() {
               </div>
               <div className="category-images">
                 {filteredItems.map((item) => {
-                  const { id, image, tyre_model, tyre_size, tyre_brand, price } = item;
+                  const { image, tyre_model, tyre_size, tyre_brand, price } = item;
                   return (
-                    <div className="tire-box" key={id}>
+                    <div className="tire-box" >
                       <img src={image} alt={tyre_model} />
                       <div className="content">
-                        <h2>{tyre_brand}</h2>
+                      <h2>
+                        {tyre_brand === 'Apollo' && <img src={apollo} alt="Apollo" />}
+                        {tyre_brand === 'Bridgestone' && <img src={bridgestone} alt="Bridgestone" />}
+                        {tyre_brand === 'JK' && <img src={jk} alt="JK" />}
+                        {(tyre_brand !== 'Apollo' && tyre_brand !== 'Bridgestone' && tyre_brand !== 'JK') && tyre_brand}
+                      </h2>
                         <h3>{tyre_model}</h3>
                         <p>{tyre_size}</p>
                         <div className="price">Price: {price}</div>
@@ -177,7 +184,7 @@ function Product() {
         newestOnTop={false}
         closeOnClick
         rtl={false}
-        pauseOnFocusLoss
+        pauseOnFocusLoss  
         draggable
         pauseOnHover
         theme="dark"

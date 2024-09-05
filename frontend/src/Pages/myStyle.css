@@ -3,6 +3,7 @@ body{
     margin:0;
     padding: 0;
     font-family: "Acme", sans-serif;
+    /* font-size: 18px; */
     background: #EDEEF1;
 }
 
@@ -22,26 +23,53 @@ body{
     z-index: 1000;
 }
 
-#navbar a.active{
+/* #navbar a.active{
     transform: scaleX(1.2);
     padding: 3px;
     color:rgb(0, 234, 255);
     border-bottom:3px solid #000000;
-}
+} */
 
-.page-link{
+/* underline effects start */
+
+.page-link {
+    position: relative;
     text-decoration: none;
     list-style: none;
     margin: 8px 6px 8px 6px;
     color: #000000;
-    transform: scale(1.05);
-    transition-duration: 0.3s; 
+    transition: transform 0.3s ease;
+    overflow: hidden;
 }
 
-.page-link:hover{
-    color:rgb(0, 234, 255);
-    transform: scale(1.05);
+.page-link::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: #000000; 
+    transform: scaleX(0);
+    transform-origin: bottom right; 
+    transition: transform 0.3s ease-in-out;
 }
+
+.page-link:hover::after, .page-link.active::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+.page-link:hover {
+    color:rgb(0, 234, 255);
+}
+
+.page-link.active {
+    color:rgb(0, 234, 255);
+}
+
+
+/* underline effects end */
 
 .nav-item ul{
     list-style: none;
@@ -63,15 +91,7 @@ body{
     color: rgb(255, 122, 5);
 }
 
-.cart{
-    margin-top: 50px;
-}
-
-.product{
-    margin-top: 50px;
-}
-
-.help{
+.cart, .product, .help {
     margin-top: 50px;
 }
 
@@ -131,34 +151,35 @@ body{
 
 .dropDownProfile{
     position: absolute;
-    top: 97%;
+    top: 110%;
     right: 1rem;
-    width: 140px;
-    height: 145px;
+    width: 145px;
+    height: 195px;
     padding: 15px;
-    border-radius: 15px;
+    border-radius: 10px;
     background-color: white;
-    border: 1px solid gray;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.9);
 }
 
-.dropDownProfile::before{
-    content: '';
+.dropDownProfile h2{
+    color: #000000;
+    font-size: 20px;
+    letter-spacing: 0;
+    padding-bottom: 8px;
+}
+
+.user-profile{
     position: absolute;
-    top: -0.7rem;
-    right: 1rem;
-    width: 20px;
-    height: 20px;
-    transform: rotate(45deg);
-    background-color: white;
-    border-left: 1px solid gray;
-    border-top: 1px solid gray;
+    margin-top: 5px;
+    margin-left: -40px;
+    margin-right: 30px;
+    padding-bottom: 3px;
+    scale: 200%;
 }
 
 .dropDownProfile ul{
     list-style: none;
     margin-top: 10px;
-    margin-left: 10px;
 }
 
 .dropDownProfile li{
@@ -170,6 +191,12 @@ body{
 .dropDownProfile li:hover {
     color:rgb(0, 234, 255);
     transform: scale(1.05);
+}
+
+.dropDownProfile hr{
+    width:150px;
+    margin-top: -5px;
+    margin-left: -42px;
 }
 
 /* For Cart */
@@ -238,5 +265,54 @@ body{
 .profile-list{
     margin-left: -25px;
     margin-right: 10px;
-    scale: 140%;
+    scale: 110%;
 }
+
+/* Updated CSS for dropdown menus */
+
+.dropDownMenu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 140px;
+  background-color: white;
+  border: 1px solid gray;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.9);
+  display: none;
+  z-index: 1000;
+}
+
+.dropDownMenu.visible {
+  display: block;
+}
+
+.dropDownMenu.hidden {
+  display: none;
+}
+
+.dropDownMenu ul {
+  list-style: none;
+  margin: 0;
+  padding: 10px 0;
+}
+
+.dropDownMenu li {
+  margin: 0;
+  padding: 10px;
+  cursor: pointer;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.dropDownMenu li:hover {
+  color: rgb(0, 234, 255);
+  transform: scale(1.05);
+}
+
+.menu-icon {
+  margin-right: 10px;
+}
+
+
+/* responsive */
+

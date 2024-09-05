@@ -2,17 +2,18 @@ const vehicleData = {
     Car: {
       brands: [
         'Maruti Suzuki', 'Hyundai', 'Tata Motors', 'Mahindra', 'Honda', 
-        'Toyota', 'Kia', 'Renault', 'Ford', 'Volkswagen'
+        'Toyota', 'Kia', 'Renault', 'Nissan', 'Ford', 'Volkswagen'
       ],
       models: {
         'Maruti Suzuki': ['Omni','Alto', 'Swift', 'Baleno', 'Swift Dzire', 'Vitara Brezza'],
-        Hyundai: ['Santro', 'i10', 'i20', 'Creta', 'Verna'],
+        Hyundai: ['Santro', 'i10', 'i20', 'Creta'],
         'Tata Motors': ['Nano','Tiago', 'Nexon', 'Altroz', 'Harrier', 'Safari'],
-        Mahindra: ['Thar', 'XUV300', 'XUV500', 'Scorpio', 'Bolero'],
+        Mahindra: ['Thar', 'KUV100', 'XUV300', 'XUV500', 'Scorpio', 'Bolero'],
         Honda: ['Amaze', 'City', 'WR-V', 'Jazz', 'Civic'],
         Toyota: ['Innova', 'Fortuner', 'Etios', 'Yaris', 'Glanza'],
         Kia: ['Seltos', 'Sonet', 'Carnival'],
         Renault: ['Kwid', 'Duster', 'Triber', 'Kiger'],
+        Nissan: ['Terrano', 'Magnite'],
         Ford: ['EcoSport', 'Figo', 'Endeavour', 'Aspire'],
         Volkswagen: ['Polo', 'Vento', 'Tiguan', 'Ameo']
       }

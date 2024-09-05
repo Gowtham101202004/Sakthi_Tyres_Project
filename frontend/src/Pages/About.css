@@ -39,7 +39,6 @@
 
 .about-section:hover {
     transform: translateY(-10px);
-    background-color: #f3f3f3;
 }
 
 .about-section h2 {

@@ -1,0 +1,22 @@
+.contact-tyre-maps{
+    width: 150%; 
+    height: 500px;
+    margin : 90px 0 20px 70px;
+}
+
+.location-container{
+    display: flex;
+    position: relative;
+    margin: 30px 0 -70px 650px;
+}
+
+.location-container img{
+    width: 70px;
+    height: 70px;
+}
+
+.location-container h1{
+    color:black;
+    margin-top: 15px;
+    font-weight: 300;
+}

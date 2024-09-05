@@ -1,21 +1,27 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagnifyingGlass, faCircleUser, faGear, faCircleInfo, faArrowRightFromBracket, faCartShopping ,faHeart, faDolly } from '@fortawesome/free-solid-svg-icons';
+import { faMagnifyingGlass, faCircleUser, faGear, faCircleInfo, faArrowRightFromBracket, faCartShopping ,faHeart, faDolly, faPen} from '@fortawesome/free-solid-svg-icons';
 import './myStyle.css';
 import Sakthi from '../assets/Sakthi.png';
 import { NavLink, BrowserRouter as Router, useNavigate } from 'react-router-dom';
 import { Link, Outlet } from 'react-router-dom';
-import Footer from './Footer';
 
 const DropDownProfile = () => {
     const navigate = useNavigate();
+    const handleProfile = () => {
+        navigate('/Profile'); // Navigate to the Profile component
+      };
     return (
         <div className='dropDownProfile'>
-            <ul>
-                <li>
-                    <FontAwesomeIcon icon={faCircleUser} className='profile-list' />
-                    Profile
+            <h2><FontAwesomeIcon icon={faCircleUser} className='user-profile'/>
+            Profile
+            </h2>
+            <ul>    
+                <hr/>
+                <li onClick={handleProfile}>
+                    <FontAwesomeIcon icon={faPen} className='profile-list' />
+                    Edit Profile
                 </li>
                 <li>
                     <FontAwesomeIcon icon={faGear} className='profile-list' />
@@ -25,6 +31,7 @@ const DropDownProfile = () => {
                     <FontAwesomeIcon icon={faCircleInfo} className='profile-list' />
                     About
                 </li>
+                <hr/>
                 <li onClick={() => navigate('/login')}>
                     <FontAwesomeIcon icon={faArrowRightFromBracket} className='profile-list' />
                     Logout
@@ -46,7 +53,7 @@ const DropDownCart = () => {
 };
 
 function Home() {
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     const [isProfileDropdownVisible, setIsProfileDropdownVisible] = useState(false);
     const [isCartDropdownVisible, setIsCartDropdownVisible] = useState(false);
@@ -77,7 +84,7 @@ function Home() {
                             <li><NavLink className='page-link' to='/'>Home</NavLink></li>
                             <li><NavLink className='page-link' to='product'>Product</NavLink></li>
                             <li
-                                onMouseEnter={() => handleCartHover(true)}
+                                o       nMouseEnter={() => handleCartHover(true)}
                                 onMouseLeave={() => handleCartHover(false)}
                             >
                                 <NavLink className='page-link' to='cart'>
@@ -103,7 +110,6 @@ function Home() {
             <div className='Outlet'>
                 <Outlet />
             </div>
-            <Footer />
         </>
     );
 }
