@@ -182,11 +182,18 @@ select:focus {
     margin-bottom: 10px;
     color: #333;
 }
-  
-  .tire-box .price {
-    font-size: 1.1em;
-    color: #ff5722;
+  .tire-box .price{
     margin-bottom: 15px;
+  }
+
+  .tire-box .price-label  {
+    font-size: 1.3em;
+    color: #ff5722;
+  }
+
+  .tire-box .price-value  {
+    font-size: 1.1em;
+    color: black;
   }
   
   .tire-box .buttons {

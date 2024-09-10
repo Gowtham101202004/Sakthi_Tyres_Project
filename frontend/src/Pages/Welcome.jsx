@@ -1,4 +1,8 @@
 import React, { useState, useEffect } from 'react';
+
+import Michelin_Ads from '../assets/Welcome/michelin_ads.png';
+import Bridgestone_ads from '../assets/Welcome/bridgestone_ads.jpg';
+
 import Michelin from '../assets/Welcome/michelin.png';
 import Bridgestone from '../assets/Welcome/bridgestone.jpg';
 import Apollo from '../assets/Welcome/Apollo.jpeg';
@@ -19,7 +23,7 @@ import './Welcome.css';
 function Welcome() {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const images = [Michelin, Bridgestone, JK, Apollo];
+  const images = [Michelin_Ads, Bridgestone_ads, JK, Apollo];
 
   useEffect(() => {
     const interval = setInterval(() => {

@@ -10,7 +10,7 @@ function Footer() {
       <div className="footer-content">
         <div className="footer-section footer-logo">
           <img className='tyre' src={Sakthi} alt="Sakthi Tyres Logo" />
-          <div>
+          <div className='about-sakthi-tyres'>
             <h2>Sakthi Tyres</h2>
             <p>Your one-stop solution for all your tyre needs. We offer a wide range of tyres from top brands, ensuring safety, durability, and performance.</p>
           </div>
@@ -18,17 +18,17 @@ function Footer() {
         <div className="footer-section quick-links">
           <h3>Quick Links</h3>
           <ul>
-            <li><a href="/about-us">About Us</a></li>
+            <li><a href="/about">About Us</a></li>
             <li><a href="/product">Products</a></li>
-            <li><a href="/services">Services</a></li>
+            <li><a href="/help">Services</a></li>
             <li><a href="/contact">Contact Us</a></li>
           </ul>
         </div>
         <div className="footer-section">
           <h3>Contact Us</h3>
-          <p><strong>Phone:</strong> +91-1234567890</p>
+          <p><strong>Phone:</strong> 9443088649, 9363329176</p>
           <p><strong>Email:</strong> info@sakthityres.com</p>
-          <p><strong>Address:</strong> 1234 Tyre Street, City, State, 567890</p>
+          <p><strong>Address:</strong> 591, 1, Mysore Trunk Rd, South Rangasamuthram, Rangasamudram, Sathyamangalam, Tamil Nadu 638402.2003</p>
         </div>
         <div className="footer-section">
           <h3>Follow Us</h3>

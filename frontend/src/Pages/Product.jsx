@@ -160,7 +160,10 @@ function Product() {
                       </h2>
                         <h3>{tyre_model}</h3>
                         <p>{tyre_size}</p>
-                        <div className="price">Price: {price}</div>
+                        <div className='price'>
+                          <span className="price-label">Price : </span>
+                          <span className="price-value">{price}</span>
+                        </div>
                         <div className="buttons">
                           <IconButton className="add-to-cart" onClick={() => addToCart(item)} title='Add to cart'><AddShoppingCartTwoToneIcon/></IconButton>
                           <a href="#">

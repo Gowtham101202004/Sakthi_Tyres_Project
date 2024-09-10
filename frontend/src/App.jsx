@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation, Navigate, useNavigation, useNavigate } from 'react-router-dom';
 import Login from './Form/Login';
-import Registeration from './Form/Registeration';
+import Registration from './Form/Registration';
 import Home from './Pages/Home';
 import Product from './Pages/Product';
 import Cart from './Pages/Cart/Cart';
@@ -16,6 +16,7 @@ import LoadingComponent from './Pages/Animation/Loading';
 
 function App() {
   const [cartItems, setCartItems] = useState([]);
+
 
   const addToCart = (item) => {
     setCartItems((prevItems) => [...prevItems, item]);
@@ -39,20 +40,21 @@ function MainContent({ cartItems, addToCart, removeFromCart }) {
   const showFooter = !['/login', '/register'].includes(location.pathname);
 
   return (
+    
     <>
-      <LoadingComponent/>
+      <LoadingComponent />
       <Routes>
         <Route path='/' element={<Home />}>
           <Route index element={<Welcome />} />
-          <Route path='/product' element={<Product addToCart={addToCart} />} />
-          <Route path='/cart' element={<Cart cartItems={cartItems} removeFromCart={removeFromCart} />} /> {/* Passing cartItems and removeFromCart */}
-          <Route path='/about' element={<About />} />
-          <Route path='/contact' element={<Contact />} />
-          <Route path='/help' element={<Help />} />
-          <Route path="/Profile" element={<Profile />} />
+          <Route path='product' element={<Product addToCart={addToCart} />} />
+          <Route path='cart' element={<Cart cartItems={cartItems} removeFromCart={removeFromCart} />} />
+          <Route path='about' element={<About />} />
+          <Route path='contact' element={<Contact />} />
+          <Route path='help' element={<Help />} />
+          <Route path="profile" element={<Profile />} />
         </Route>
         <Route path='/login' element={<Login />} />
-        <Route path='/register' element={<Registeration />} />
+        <Route path='/register' element={<Registration />} />
       </Routes>
       {showFooter && <Footer />} 
     </>

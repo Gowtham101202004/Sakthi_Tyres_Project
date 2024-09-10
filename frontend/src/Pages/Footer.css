@@ -30,6 +30,10 @@
   margin: 15px;
 }
 
+.footer-section p strong{
+  font-size: 15px;
+}
+
 .footer-logo {
   display: flex;
   flex-direction: column; 
@@ -104,19 +108,25 @@
   padding: 0;
 }
 
+/* text hover starts */
 .footer-section ul li {
   margin-bottom: 10px;
 }
 
 .footer-section ul li a {
-  color: #ddd;
+  display: inline-block;
+  font-size: 16px;
+  transition: all 0.3s ease;
   text-decoration: none;
-  transition: color 0.3s;
+  color: inherit;
 }
 
 .footer-section ul li a:hover {
+  transform: scale(1.1) translateY(-5px); 
   color: #ffcc00;
 }
+
+/* text hover ends */
 
 .footer-section.quick-links {
   display: flex;
@@ -175,4 +185,15 @@
   margin-bottom: -25px;
   font-size: 14px;
   border-top: 1px solid #333;
+}
+
+.about-sakthi-tyres h2{
+  font-weight: 650;
+  letter-spacing: 1.5px;
+}
+
+.about-sakthi-tyres p{
+  font-size: 15px;
+  text-align: justify;
+  text-justify: inter-word;
 }
