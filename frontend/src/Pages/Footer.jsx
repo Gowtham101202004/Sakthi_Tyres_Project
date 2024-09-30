@@ -30,7 +30,7 @@ function Footer() {
           <p><strong>Email:</strong> info@sakthityres.com</p>
           <p><strong>Address:</strong> 591, 1, Mysore Trunk Rd, South Rangasamuthram, Rangasamudram, Sathyamangalam, Tamil Nadu 638402.2003</p>
         </div>
-        <div className="footer-section">
+        <div className="footer-section link">
           <h3>Follow Us</h3>
           <div className="footer-socials">
             <a className='face' href="https://facebook.com" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faFacebookF} /></a>

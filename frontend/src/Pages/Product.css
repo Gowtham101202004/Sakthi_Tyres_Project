@@ -1,18 +1,10 @@
-@media only screen and (max-width:1024px){
-
-    .product{
-        background-color: black;
-        margin-top:50 !important;
-    }
-}
-
-
 .product {
     margin: 20px;
     color: black;
     padding-bottom:20px ;
     height: 600px;
     overflow: scroll;
+    overflow-x: hidden;
 }
 
 ::-webkit-scrollbar{
@@ -230,3 +222,11 @@ select:focus {
     background-color: #116c9a;
   }
   
+
+  /* responsive */
+@media only screen and (max-width:1024px){
+
+    .product{
+        margin-top:50 !important;
+    }
+}

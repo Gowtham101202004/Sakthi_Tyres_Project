@@ -290,4 +290,93 @@
     color: rgb(49, 200, 211);
     cursor: pointer;
   }
+
+
+  /* Responsive Styles */
+
+  @media (max-width: 1024px) {
+    
+    .main-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100vw;
+      height: 100vh;
+      margin: 0;
+      overflow: hidden;
+      position: relative;
+      border-radius: 10px;
+    }
+
+    .container {
+      height: 100%;
+      width: 100%;
+    }
+
+    .left {
+      position: relative;
+      height: 100%;
+      width: 100%;
+      background: rgba(65, 65, 68, 0.6);
+      border-radius: 10px;
+    }
+
+    .bg {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      z-index: -1;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+    
+    .right {
+      height: 80vh;
+      width: 55vw;
+      margin-top: 70px;
+      padding: 0px 80px;
+      position: absolute;
+      background: none; 
+      border-radius: 0px 65px 65px 0px;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .box {
+      position: relative;
+      width: 300px;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .box form .inputBox {
+      position: relative;
+      width: 230px;
+      margin-top: 25px;
+      margin-left: -8px;
+    }
+ 
+    .box form input[type="submit"] {
+      border: none;
+      outline: none;
+      padding: 9px 25px;
+      background: white;
+      color: black;
+      transition: 0.4s;
+      cursor: pointer;
+      font-size: 0.9em;
+      border-radius: 4px;
+      font-weight: 600;
+      width: 230px;
+      margin-top: 40px;
+      margin-left: -8px;
+    }
+
+    .last {
+      color: white;
+      margin-left: 10px;
+      font-size: 15px;
+    }
+  }
   

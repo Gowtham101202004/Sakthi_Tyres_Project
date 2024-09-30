@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './Product.css';
-import Cars from './Vehicle/Cars';
+// import Cars from './Vehicle/Cars';
 import vehicleData from './Vehicle/VehicleData';
 import { useNavigate } from 'react-router-dom';
 
@@ -32,14 +32,38 @@ import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 
 import { ToastContainer, toast, Bounce } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import axios from 'axios';
+
+
 
 function Product() { 
   const [activeCategory, setActiveCategory] = useState('Car');
   const [selectedBrand, setSelectedBrand] = useState('');
   const [selectedModel, setSelectedModel] = useState('');
   const [cart, setCart] = useState([]);
-  const navigate = useNavigate();
+  const [Cars,setCars]=useState([]);
+  const navigate = useNavigate(null);
 
+
+  useEffect(()=>{
+
+    const fetch=async()=>{
+      try{
+        const res=await axios.get("http://localhost:8080/user/displaycardata");
+        console.log(res.data.Data);
+        setCars(res.data.Data);
+      }
+      catch(err){
+        console.log(err.response.data.message);
+      }
+    }
+    fetch();
+  },[]);
+
+  useEffect(() => {
+    const storedCart = JSON.parse(localStorage.getItem('cart')) || [];
+    setCart(storedCart);
+  }, []);
   const categories = [
     { name: 'Car', icon: Car, activeIcon: Car_active },
     { name: 'Two Wheeler', icon: Bike, activeIcon: Bike_active },
@@ -50,12 +74,6 @@ function Product() {
     { name: 'MCV', icon: MCV, activeIcon: MCV_active },
     { name: 'ICV', icon: ICV, activeIcon: ICV_active }
   ];
-
-  useEffect(() => {
-    const storedCart = JSON.parse(localStorage.getItem('cart')) || [];
-    setCart(storedCart);
-  }, []);
-
   const handleBrandChange = (e) => {
     setSelectedBrand(e.target.value);
     setSelectedModel('');

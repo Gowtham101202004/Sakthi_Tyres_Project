@@ -86,7 +86,7 @@ function Registration() {
               </div>
               <input type="submit" value="Sign up" onClick={validateData} />
               <div className='last'>
-                <p>Already have an account? <u onClick={() => navigate('/login')}>Sign in</u></p>
+                <p>Already have an account? <u onClick={() => navigate('/login')}>&nbsp;&nbsp;Sign in</u></p>
               </div>
             </form>
             {registerStatus ? (<Toaster key={registerStatus.key} message={registerStatus.msg} />) : null}

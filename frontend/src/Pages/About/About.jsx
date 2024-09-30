@@ -1,6 +1,6 @@
 import React from 'react';
 import './About.css'; 
-import Tyre from '../assets/About/Sakthi-tyres.png'
+import Tyre from './Sakthi-tyres.png'
 
 function About() {
   return (

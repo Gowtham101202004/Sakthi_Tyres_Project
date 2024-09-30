@@ -8,7 +8,7 @@ import './style.css';
 function Login() {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState({ name: "", password: "" });
-  const [logInStatus, setLogInStatus] = useState("");
+  const [logInStatus, setLogInStatus] = useState(null);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -26,14 +26,13 @@ function Login() {
       };
 
       const res = await axios.post("http://localhost:8080/user/login", data, config);
-      console.log("Login response:", res.data); // Log the successful response
-      setLogInStatus({ msg: "Login Successful! 😎", key: Math.random() });
-      setLoading(false);
-      navigate('/');
-      localStorage.setItem("userStatus",true);  // Redirect to home after successful login
+      console.log("Login response:", res.data);
+      setLogInStatus({ msg: "Login Successful! 😎", key: Math.random(), severity: "success" });
+      localStorage.setItem("userStatus", "true");
     } catch (err) {
-      console.error("Axios Error -> ", err.response ? err.response.data : err.message); // Log the full error response
-      setLogInStatus({ msg: err.response ? err.response.data.message : "An error occurred. Please try again.", key: Math.random() });
+      console.error("Axios Error -> ", err.response ? err.response.data : err.message);
+      setLogInStatus({ msg: err.response ? err.response.data.message : "An error occurred. Please try again.", key: Math.random(), severity: "error" });
+    } finally {
       setLoading(false);
     }
   };
@@ -41,12 +40,16 @@ function Login() {
   const ValidateData = (e) => {
     e.preventDefault();
     if (!data.name || !data.password) {
-      setLogInStatus({ msg: "Fill in all fields!", key: Math.random() });
+      setLogInStatus({ msg: "Fill in all fields!", key: Math.random(), severity: "error" });
     } else if (data.password.length < 6) {
-      setLogInStatus({ msg: "Password must be at least 6 characters long", key: Math.random() });
-    } else { 
+      setLogInStatus({ msg: "Password must be at least 6 characters long", key: Math.random(), severity: "error" });
+    } else {
       display();
     }
+  };
+
+  const handleToasterClose = () => {
+    navigate('/'); // Navigate after the toast closes
   };
 
   return (
@@ -81,12 +84,19 @@ function Login() {
                 <div className="links">
                   <a href="#">Forgot Password?</a>
                 </div>
-                <input type="submit" value="Sign in" />
+                <input type="submit" value="Sign in"/>
                 <div className='last'>
-                  <p>Don't have an account? <u onClick={() => navigate('/register')}>Sign up</u></p>
+                  <p>Don't have an account?<u onClick={() => navigate('/register')}>&nbsp;&nbsp;Sign up</u></p>
                 </div>
               </form>
-              {logInStatus ? (<Toaster key={logInStatus.key} message={logInStatus.msg} />) : null}
+              {logInStatus && (
+                <Toaster
+                  key={logInStatus.key}
+                  message={logInStatus.msg}
+                  severity={logInStatus.severity}
+                  onClose={handleToasterClose}
+                />
+              )}
             </div>
           </div>
         </div>

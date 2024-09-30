@@ -1,59 +1,71 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleUser, faCartShopping, faArrowRightFromBracket, faPen, faGear, faCircleQuestion} from '@fortawesome/free-solid-svg-icons';
+import { faCircleUser, faCartShopping, faArrowRightFromBracket, faPen, faGear, faCircleQuestion } from '@fortawesome/free-solid-svg-icons';
 import './myStyle.css';
 import Sakthi from '../assets/Sakthi.png';
 import { NavLink, BrowserRouter as Router, useNavigate, useLocation } from 'react-router-dom';
 import { Outlet } from 'react-router-dom';
 import Lottie from 'react-lottie';
-import logoutAnimation from '../assets/Home/logout.json'; 
+import logoutAnimation from '../assets/Home/logout.json';
 import Login_Gif from '../assets/Home/Login_Animation.gif';
 
 function Home() {
     const [isProfileDropdownVisible, setIsProfileDropdownVisible] = useState(false);
     const [cartCount, setCartCount] = useState(0);
     const [showLoginPrompt, setShowLoginPrompt] = useState(false);
-    const [showLogoutAnimation, setShowLogoutAnimation] = useState(false); // State for showing animation
-    const location = useLocation(); 
+    const [showLogoutAnimation, setShowLogoutAnimation] = useState(false);
+    const location = useLocation();
     const navigate = useNavigate();
 
     useEffect(() => {
         const storedCart = JSON.parse(localStorage.getItem('cart')) || [];
         setCartCount(storedCart.length);
-    }, []);
+
+        // Redirect if trying to access product page without being logged in
+        const userStatus = JSON.parse(localStorage.getItem("userStatus"));
+        if ((location.pathname === '/product' || location.pathname === '/cart') && !userStatus) {
+            setShowLoginPrompt(true);
+            navigate('/login'); // Redirect to login page if not logged in
+        }
+    }, [location, navigate]);
 
     const handleProfileClick = () => {
         setIsProfileDropdownVisible(!isProfileDropdownVisible);
     };
 
-    const handleCartClick = () => {
-        navigate('/cart');
-    };
-
     const handleProductClick = () => {
         const userStatus = JSON.parse(localStorage.getItem("userStatus"));
         if (!userStatus) {
-            setShowLoginPrompt(true); 
+            setShowLoginPrompt(true);
         } else {
-            navigate('/product'); 
+            navigate('/product');
+        }
+    };
+
+    const handleCartClick = () => {
+        const userStatus = JSON.parse(localStorage.getItem("userStatus"));
+        if (!userStatus) {
+            setShowLoginPrompt(true);
+        } else {
+            navigate('/cart');
         }
     };
 
     const handleLoginClick = () => {
         navigate('/login');
     };
-
+    
     const closeLoginPrompt = () => {
         setShowLoginPrompt(false);
     };
 
     const handleLogoutClick = () => {
         localStorage.setItem("userStatus", false);
-        setShowLogoutAnimation(true); 
+        setShowLogoutAnimation(true);
         setTimeout(() => {
-            navigate('/login');  
-        }, 3000); 
+            navigate('/login');
+        }, 3000);
     };
 
     const isCartActive = location.pathname === '/cart';
@@ -61,8 +73,8 @@ function Home() {
 
     const defaultOptions = {
         loop: true,
-        autoplay: true, 
-        animationData: logoutAnimation, 
+        autoplay: true,
+        animationData: logoutAnimation,
         rendererSettings: {
             preserveAspectRatio: 'xMidYMid slice'
         }
@@ -73,8 +85,8 @@ function Home() {
             {showLoginPrompt && (
                 <div className='login-prompt-container'>
                     <div className='login-prompt-box'>
-                        <img src={Login_Gif} alt="Login_Gif"/>
-                        <h2>Please login in to continue </h2>
+                        <img src={Login_Gif} alt="Login_Gif" />
+                        <h2>Please login to continue </h2>
                         <button className='login-button' onClick={handleLoginClick}>
                             Login
                         </button>
@@ -116,13 +128,17 @@ function Home() {
                                 <span className="edit-profile-text">Settings</span>
                             </li>
                             <li>
-                                <FontAwesomeIcon className="icons" icon={faCircleQuestion}/>
+                                <FontAwesomeIcon className="icons" icon={faCircleQuestion} />
                                 <span className="edit-profile-text">Help & Support</span>
                             </li>
                             <hr />
-                            <li onClick={handleLogoutClick}>
+                            <li 
+                                onClick={JSON.parse(localStorage.getItem("userStatus")) ? handleLogoutClick : handleLoginClick}
+                                className={JSON.parse(localStorage.getItem("userStatus")) ? 'logout-item' : 'login-item'}>
                                 <FontAwesomeIcon className="icons-log" icon={faArrowRightFromBracket} />
-                                <span className="edit-profile-text">Logout</span>
+                                <span className="edit-profile-text">
+                                    {JSON.parse(localStorage.getItem("userStatus")) ? 'Logout' : 'Login'}
+                                </span>
                             </li>
                         </ul>
                     </div>
@@ -133,8 +149,8 @@ function Home() {
                         <ul id='navbar'>
                             <li><NavLink className='page-link' to='/'>Home</NavLink></li>
                             <li>
-                                <span 
-                                    className={`page-link ${isProductActive ? 'active' : ''}`} 
+                                <span
+                                    className={`page-link ${isProductActive ? 'active' : ''}`}
                                     onClick={handleProductClick}
                                 >
                                     Product
@@ -146,7 +162,7 @@ function Home() {
                             <FontAwesomeIcon
                                 icon={faCircleUser}
                                 className='profile'
-                                onClick={handleProfileClick}/>
+                                onClick={handleProfileClick} />
                         </ul>
                     </nav>
                 </div>
