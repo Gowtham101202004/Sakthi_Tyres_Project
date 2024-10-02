@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import Logo from '../assets/tyre2.png';
 import './style.css';
 import { useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import Toaster from './Toaster';
 
@@ -39,7 +41,9 @@ function Registration() {
 
         await axios.post("http://localhost:8080/user/register", data, config);
         setRegisterStatus({ msg: "Account created successfully! 😎", key: Math.random() });
-        navigate('/login');
+        setTimeout(() => {
+          navigate('/login');
+        }, 2000); 
       } catch (err) {
         setRegisterStatus({ msg: "Registration failed. Try again.", key: Math.random() });
       }
@@ -50,6 +54,9 @@ function Registration() {
     <div className='main-container'>
       <div className='container'>
         <div className='left'>
+          <div className='back-button' onClick={() => navigate('/')}>
+              <FontAwesomeIcon icon={faArrowLeft} className='left-arrow'/>
+          </div>
           <img className='bg' src={Logo} alt='Logo'/>
           <div className="logo">
             <h2>Sakthi Tyres</h2>

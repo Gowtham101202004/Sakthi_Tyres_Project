@@ -9,6 +9,7 @@ import { Outlet } from 'react-router-dom';
 import Lottie from 'react-lottie';
 import logoutAnimation from '../assets/Home/logout.json';
 import Login_Gif from '../assets/Home/Login_Animation.gif';
+import axios from 'axios';
 
 function Home() {
     const [isProfileDropdownVisible, setIsProfileDropdownVisible] = useState(false);
@@ -19,14 +20,31 @@ function Home() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        const storedCart = JSON.parse(localStorage.getItem('cart')) || [];
-        setCartCount(storedCart.length);
+        const fetchCartCount = async () => {
+            try {
+                const token = localStorage.getItem('token');
 
-        // Redirect if trying to access product page without being logged in
+                if (token) {
+                    const { data } = await axios.get('http://localhost:8080/user/cart', {
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                        },
+                    });
+                    setCartCount(data.length); 
+                } else {
+                    setCartCount(0); 
+                }
+            } catch (error) {
+                console.error('Failed to fetch cart count:', error);
+                setCartCount(0); 
+            }
+        };
+        fetchCartCount();
+
         const userStatus = JSON.parse(localStorage.getItem("userStatus"));
         if ((location.pathname === '/product' || location.pathname === '/cart') && !userStatus) {
             setShowLoginPrompt(true);
-            navigate('/login'); // Redirect to login page if not logged in
+            navigate('/login');
         }
     }, [location, navigate]);
 

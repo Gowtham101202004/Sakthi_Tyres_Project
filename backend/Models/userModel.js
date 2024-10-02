@@ -5,19 +5,19 @@ const userModel = mongoose.Schema(
   {
     name: {
       type: String,
-      required: true,  // Corrected typo
+      required: true,  
     },
     email: {
       type: String,
-      required: true,  // Corrected typo
+      required: true,  
     },
     password: {
       type: String,
-      required: true,  // Corrected typo
+      required: true,  
     },
   },
   {
-    timestamps: true,  // Corrected typo
+    timestamps: true,
   }
 );
 
@@ -26,13 +26,13 @@ userModel.methods.matchPassword = async function (enteredPassword) {
 };
 
 userModel.pre("save", async function (next) {
-  if (!this.isModified("password")) {  // Corrected condition
+  if (!this.isModified("password")) { 
     return next();
   }
 
   const salt = await bcrypt.genSalt(10);
   this.password = await bcrypt.hash(this.password, salt);
-  next();  // Call next() to proceed with the save operation
+  next();  
 });
 
 const User = mongoose.model("users", userModel);

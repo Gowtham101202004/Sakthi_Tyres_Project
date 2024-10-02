@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import left from '../assets/tyre2.png';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import Toaster from './Toaster';
 import './style.css';
 
@@ -25,13 +27,23 @@ function Login() {
         },
       };
 
+      // Make the login request
       const res = await axios.post("http://localhost:8080/user/login", data, config);
       console.log("Login response:", res.data);
-      setLogInStatus({ msg: "Login Successful! 😎", key: Math.random(), severity: "success" });
+
+      // Store the token in localStorage
+      localStorage.setItem("token", res.data.token);  // Correctly store token
       localStorage.setItem("userStatus", "true");
+
+      setLogInStatus({ msg: "Login Successful! 😎", key: Math.random(), severity: "success" });
+
+      setTimeout(() => {
+        navigate('/');
+      }, 2000); 
+
     } catch (err) {
       console.error("Axios Error -> ", err.response ? err.response.data : err.message);
-      setLogInStatus({ msg: err.response ? err.response.data.message : "An error occurred. Please try again.", key: Math.random(), severity: "error" });
+      setLogInStatus({ msg: err.response ? err.response.data.message : "Invalid username or password. Please try again.", key: Math.random(), severity: "error" });
     } finally {
       setLoading(false);
     }
@@ -49,7 +61,10 @@ function Login() {
   };
 
   const handleToasterClose = () => {
-    navigate('/'); // Navigate after the toast closes
+    // Only close the toaster, don't navigate unless it's a success
+    if (logInStatus?.severity === 'success') {
+      navigate('/');
+    }
   };
 
   return (
@@ -57,6 +72,9 @@ function Login() {
       <div className='main-container'>
         <div className="container">
           <div className="left">
+            <div className='back-button' onClick={() => navigate('/')}>
+                <FontAwesomeIcon icon={faArrowLeft} className='left-arrow'/>
+            </div>
             <img className="bg" src={left} alt="Background" />
             <div className="logo">
               <h2>Sakthi Tyres</h2>
@@ -84,7 +102,7 @@ function Login() {
                 <div className="links">
                   <a href="#">Forgot Password?</a>
                 </div>
-                <input type="submit" value="Sign in"/>
+                <input type="submit" value="Sign in" disabled={loading}/>
                 <div className='last'>
                   <p>Don't have an account?<u onClick={() => navigate('/register')}>&nbsp;&nbsp;Sign up</u></p>
                 </div>

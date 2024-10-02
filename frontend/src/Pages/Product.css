@@ -221,7 +221,6 @@ select:focus {
   .tire-box .buy-now:hover {
     background-color: #116c9a;
   }
-  
 
   /* responsive */
 @media only screen and (max-width:1024px){

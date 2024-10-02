@@ -28,7 +28,7 @@ export default function Toaster({ message, severity = "success", onClose }) {
         horizontal: "right"
       }}
       open={open}
-      autoHideDuration={3000}
+      autoHideDuration={1500}
       onClose={handleClose}
       action={
         <IconButton size="small" aria-label="close" color="inherit" onClick={handleClose}>

@@ -86,30 +86,22 @@ function Product() {
     return isCategoryMatch && (selectedBrand || selectedModel) && isBrandMatch && isModelMatch;
   });
 
-  const addToCart = (item) => {
-    const itemInCart = cart.find(cartItem => 
-      cartItem.tyre_model === item.tyre_model && cartItem.tyre_brand === item.tyre_brand
-    );
-
-    if (itemInCart) {
-      toast.error("The item is already added to Cart", {
-        position: "top-right",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        theme: "dark",
-        transition: Bounce,
+  const addToCart = async (item) => {
+    try {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        throw new Error('No token found, please log in again.');
+      }
+  
+      await axios.post('http://localhost:8080/user/cart', item, {
+        headers: {
+          Authorization: `Bearer ${token}`,  // Make sure the token is correct
+        },
       });
-    } else {
-      const updatedCart = [...cart, item];
-      setCart(updatedCart);
-      localStorage.setItem('cart', JSON.stringify(updatedCart));
-
+  
       toast.info("The item has been added to Cart", {
         position: "top-right",
-        autoClose: 3000,
+        autoClose: 1500,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -117,8 +109,21 @@ function Product() {
         theme: "dark",
         transition: Bounce,
       });
+    } catch (error) {
+      toast.error("The item already added to Cart !", {
+        position: "top-right",
+        autoClose: 1500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "dark",
+        transition: Bounce,
+      });
+      console.error('Error adding item to cart:', error);
     }
   };
+  
 
   return (
     <>
