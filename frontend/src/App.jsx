@@ -11,8 +11,12 @@ import Help from './Pages/Help/Help';
 import Welcome from './Pages/Welcome';
 import Footer from './Pages/Footer';
 import ScrollToTop from './Pages/Scroll/ScrollToTop';
-import Profile from './Pages/Profile';
 import LoadingComponent from './Pages/Animation/Loading';
+
+import Apollo from './Pages/Brand_About/Apollo';
+import Bridgestone from './Pages/Brand_About/Bridgestone';
+import JK from './Pages/Brand_About/JK';
+import Michelin from './Pages/Brand_About/Michelin';
 
 function App() {
   const [cartItems, setCartItems] = useState([]);
@@ -51,7 +55,11 @@ function MainContent({ cartItems, addToCart, removeFromCart }) {
           <Route path='about' element={<About />} />
           <Route path='contact' element={<Contact />} />
           <Route path='help' element={<Help />} />
-          <Route path="profile" element={<Profile />} />
+          <Route path="apollo" element={<Apollo />} />
+          <Route path="bridgestone" element={<Bridgestone />} />
+          <Route path="jk" element={<JK />} />
+          <Route path="michelin" element={<Michelin />} />
+
         </Route>
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Registration />} />

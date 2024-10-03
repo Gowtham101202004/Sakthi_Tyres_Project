@@ -126,11 +126,13 @@ body {
 
 .dropDownProfile {
     position: absolute;
+    align-items: center;
     top: 110%;
     right: 0.5rem;
-    width: 145px;
-    height: 225px;
-    padding: 15px;
+    width: 190px;
+    min-height: 50px;
+    max-height: 200px;
+    padding: 10px;
     border-radius: 10px;
     background-color: white;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.9);
@@ -141,6 +143,7 @@ body {
     font-size: 20px;
     letter-spacing: 0;
     padding-bottom: 8px;
+    padding-left: 15px;
 }
 
 .user-profile {
@@ -149,6 +152,7 @@ body {
     margin-left: -40px;
     margin-right: 30px;
     padding-bottom: 3px;
+    padding-left: 4px;
     color: #adb2b3;
     scale: 200%;
 }
@@ -172,7 +176,8 @@ body {
 }
 
 .dropDownProfile hr {
-    width: 150px;
+    width: 195px;
+    height: 1.5px;
     margin-top: -5px;
     margin-left: -42px;
 }
@@ -181,7 +186,7 @@ body {
     position: relative;
     scale: 130%;
     margin-right: 10px;
-    margin-left: -30px;
+    margin-left: -25px;
     background-color: #adb2b3;
     border-radius: 50%;
     padding: 5px;
@@ -191,7 +196,7 @@ body {
     position: relative;
     scale: 130%;
     margin-right: 10px;
-    margin-left: -20px;
+    margin-left: -8px;
     background-color: #adb2b3;
     border-radius: 50%;
     padding: 5px;
@@ -199,7 +204,19 @@ body {
 
 .edit-profile-text {
     position: absolute;
-    margin-top: 5px;
+    margin-top: 3px;
+    margin-left: 3px;
+}
+
+.login-item{
+    position: absolute;
+    margin-top: 2px;
+    margin-left: 20px;
+}
+
+.logout-item{
+    margin-top: -5px;
+    margin-left: 10px;
 }
 
 .profile {
@@ -221,49 +238,6 @@ body {
 }
 
 /* Profile end */
-
-.dropDownMenu {
-    position: absolute;
-    top: 100%;
-    right: 0;
-    width: 140px;
-    background-color: white;
-    border: 1px solid gray;
-    border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.9);
-    display: none;
-    z-index: 1000;
-}
-
-.dropDownMenu.visible {
-    display: block;
-}
-
-.dropDownMenu.hidden {
-    display: none;
-}
-
-.dropDownMenu ul {
-    list-style: none;
-    margin: 0;
-    padding: 10px 0;
-}
-
-.dropDownMenu li {
-    margin: 0;
-    padding: 10px;
-    cursor: pointer;
-    transition: color 0.3s ease, transform 0.3s ease;
-}
-
-.dropDownMenu li:hover {
-    color: rgb(0, 234, 255);
-    transform: scale(1.05);
-}
-
-.menu-icon {
-    margin-right: 10px;
-}
 
 /* Cart Icon Container */
 .cart-icon-container {

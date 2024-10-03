@@ -59,26 +59,57 @@
   margin-bottom: 15px;
 }
 
-.cart-tire-box .buttons {
+/* .cart-tire-box .buttons {
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
+} */
+
+.cart-tire-box .buttons-container{
   display: flex;
   justify-content: flex-start;
   gap: 10px;
 }
 
-.cart-tire-box .remove-from-cart {
+
+.cart-tire-box .buttons-container .remove-button{
+  border:none;
+  background-color: red;
+  border-radius: 5px;
+}
+
+.cart-tire-box .buttons-container .trash-icon{
+  width:25px;
+  height: 25px;
+  padding: 0px 3px;
+}
+
+.cart-tire-box .buttons-container .buy-button{
+  border:none;
+  background-color: rgb(25, 204, 25);
+  border-radius: 5px;
+}
+
+.cart-tire-box .buttons-container .buy-icon{
+  width:30px;
+  height: 30px;
+  padding: 2px 3px;
+}
+
+/* .cart-tire-box .remove-from-cart {
   padding: 10px 20px;
   font-size: 0.9em;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease, color 0.3s ease;
-  background-color: #22ABF0;
+  background-color: #ff0000;
   color: #fff;
 }
 
 .cart-tire-box .remove-from-cart:hover {
-  background-color: #116c9a;
-}
+  background-color: #b60404;
+} */
 
 .cart-empty {
   display: flex;
@@ -96,6 +127,18 @@
 .cart-empty p {
   font-size: 40px;
   margin-top: 80px;
+}
+
+.cart-loading {
+  width: 100%;
+  height: 100%;
+  margin: 10px 0 200px 500px; 
+  justify-content: center;      
+}
+
+.loading{
+  width: 100%;
+  height: 100%; 
 }
 
 /* Responsive Styles */

@@ -18,6 +18,7 @@ function Home() {
     const [showLogoutAnimation, setShowLogoutAnimation] = useState(false);
     const location = useLocation();
     const navigate = useNavigate();
+    const [username,setUserName] = useState(null);
 
     useEffect(() => {
         const fetchCartCount = async () => {
@@ -80,6 +81,8 @@ function Home() {
 
     const handleLogoutClick = () => {
         localStorage.setItem("userStatus", false);
+        localStorage.removeItem('token');
+        localStorage.removeItem('userdata');
         setShowLogoutAnimation(true);
         setTimeout(() => {
             navigate('/login');
@@ -98,6 +101,14 @@ function Home() {
         }
     };
 
+    useEffect(()=>{
+        if(localStorage.getItem('userdata')){
+            setUserName(JSON.parse(localStorage.getItem('userdata')).name);
+        } else {
+            setUserName("Profile");
+        }
+    },[]);
+
     return (
         <>
             {showLoginPrompt && (
@@ -109,7 +120,7 @@ function Home() {
                             Login
                         </button>
                         <button className='close-button' onClick={closeLoginPrompt}>
-                            Close
+                            Cancel
                         </button>
                     </div>
                 </div>
@@ -131,34 +142,37 @@ function Home() {
 
                 {isProfileDropdownVisible && (
                     <div className='dropDownProfile'>
-                        <h2>
-                            <FontAwesomeIcon icon={faCircleUser} className='user-profile' />
-                            Profile
-                        </h2>
-                        <ul>
-                            <hr />
-                            <li>
-                                <FontAwesomeIcon className="icons" icon={faPen} />
-                                <span className="edit-profile-text">Edit Profile</span>
-                            </li>
-                            <li>
-                                <FontAwesomeIcon className="icons" icon={faGear} />
-                                <span className="edit-profile-text">Settings</span>
-                            </li>
-                            <li>
-                                <FontAwesomeIcon className="icons" icon={faCircleQuestion} />
-                                <span className="edit-profile-text">Help & Support</span>
-                            </li>
-                            <hr />
-                            <li 
-                                onClick={JSON.parse(localStorage.getItem("userStatus")) ? handleLogoutClick : handleLoginClick}
-                                className={JSON.parse(localStorage.getItem("userStatus")) ? 'logout-item' : 'login-item'}>
-                                <FontAwesomeIcon className="icons-log" icon={faArrowRightFromBracket} />
-                                <span className="edit-profile-text">
-                                    {JSON.parse(localStorage.getItem("userStatus")) ? 'Logout' : 'Login'}
-                                </span>
-                            </li>
-                        </ul>
+                        {JSON.parse(localStorage.getItem("userStatus")) ? (
+                            <>
+                                <h2>
+                                    <FontAwesomeIcon icon={faCircleUser} className='user-profile' />
+                                    {username}
+                                </h2>
+                                <ul>
+                                    <hr />
+                                    <li>
+                                        <FontAwesomeIcon className="icons" icon={faPen} />
+                                        <span className="edit-profile-text">Edit Profile</span>
+                                    </li>
+                                    <li>
+                                        <FontAwesomeIcon className="icons" icon={faCircleQuestion} />
+                                        <span className="edit-profile-text">Help & Support</span>
+                                    </li>
+                                    <hr />
+                                    <li onClick={handleLogoutClick} className='logout-item'>
+                                        <FontAwesomeIcon className="icons-log" icon={faArrowRightFromBracket} />
+                                        <span className="edit-profile-text">Logout</span>
+                                    </li>
+                                </ul>
+                            </>
+                        ) : (
+                            <ul>
+                                <li onClick={handleLoginClick} className='login-item'>
+                                    <FontAwesomeIcon className="icons-log" icon={faArrowRightFromBracket} />
+                                    <span className="edit-profile-text">Login</span>
+                                </li>
+                            </ul>
+                        )}
                     </div>
                 )}
 
@@ -187,7 +201,7 @@ function Home() {
 
                 {/* Cart Icon */}
                 <div
-                    className={`cart-icon-container ${isCartActive ? 'active' : ''}`}  // Add "active" class based on URL
+                    className={`cart-icon-container ${isCartActive ? 'active' : ''}`}
                     onClick={handleCartClick}>
                     <FontAwesomeIcon icon={faCartShopping} className={`cart-icon ${isCartActive ? 'active-icon' : ''}`} />
                     {cartCount > 0 && (

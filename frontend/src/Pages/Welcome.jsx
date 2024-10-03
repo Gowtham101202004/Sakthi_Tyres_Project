@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate} from 'react-router-dom';
 
 import Michelin_Ads from '../assets/Welcome/michelin_ads.png';
 import Bridgestone_ads from '../assets/Welcome/bridgestone_ads.jpg';
@@ -22,8 +23,25 @@ import './Welcome.css';
 
 function Welcome() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const navigate = useNavigate();
 
   const images = [Michelin_Ads, Bridgestone_ads, JK, Apollo];
+
+  const handleApolloClick = () => {
+    navigate('/apollo');
+  };
+  
+  const handleJKClick = () => {
+    navigate('/jk');
+  };
+  
+  const handleMichelinClick = () => {
+    navigate('/michelin');
+  };
+  
+  const handleBridgestoneClick = () => {
+    navigate('/bridgestone');
+  };
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -41,16 +59,16 @@ function Welcome() {
       </div>
       <div className='grid-container'>
         <div className='grid-item'>
-          <img src={Apollo_Tyre} className='tyre-image' alt='Tyres' />
+          <img src={Apollo_Tyre} className='tyre-image' onClick={handleApolloClick} alt='Tyres' />
         </div>
         <div className='grid-item'>
-          <img src={Michelin} className='tyre-image' alt='Tyres' />
+          <img src={Michelin} className='tyre-image' onClick={handleMichelinClick} alt='Tyres' />
         </div>
         <div className='grid-item'>
-          <img src={Bridgestone} className='tyre-image' alt='Tyres' />
+          <img src={Bridgestone} className='tyre-image' onClick={handleBridgestoneClick} alt='Tyres' />
         </div>
         <div className='grid-item'>
-          <img src={JK} className='tyre-image' alt='Tyres' />
+          <img src={JK} className='tyre-image' onClick={handleJKClick} alt='Tyres' />
         </div>
       </div>
       <h1 className='dealership-title'>Our Dealerships</h1>

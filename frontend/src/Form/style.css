@@ -291,7 +291,7 @@
     cursor: pointer;
   }
 
-  .left-arrow{
+  .back-button .left-arrow{
     position: absolute;
     color:white;
     margin:50px 0 0 30px;
@@ -303,7 +303,12 @@
   /* Responsive Styles */
 
   @media (max-width: 1024px) {
-    
+
+    .logo{
+      width: 200px;
+      margin-left: 90px;
+    }
+
     .main-container {
       display: flex;
       justify-content: center;
@@ -325,8 +330,11 @@
       position: relative;
       height: 100%;
       width: 100%;
-      background: rgba(65, 65, 68, 0.6);
       border-radius: 10px;
+    }
+
+    .left-content{
+      display: none;
     }
 
     .bg {

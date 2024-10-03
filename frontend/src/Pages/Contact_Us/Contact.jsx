@@ -20,7 +20,6 @@ function Contact() {
           referrerPolicy="no-referrer-when-downgrade">
         </iframe>
       </div>
-      <div className='contact'>Contact</div>
     </>
   )
 }

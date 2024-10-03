@@ -32,7 +32,8 @@ function Login() {
       console.log("Login response:", res.data);
 
       // Store the token in localStorage
-      localStorage.setItem("token", res.data.token);  // Correctly store token
+      localStorage.setItem("token", res.data.token);
+      localStorage.setItem("userdata", JSON.stringify(res.data));
       localStorage.setItem("userStatus", "true");
 
       setLogInStatus({ msg: "Login Successful! 😎", key: Math.random(), severity: "success" });
