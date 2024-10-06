@@ -24,13 +24,13 @@ function Registration() {
     const emailCheck = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     if (!data.name || !data.email || !data.password || !confirmPassword) {
-      setRegisterStatus({ msg: "All fields are required!", key: Math.random() });
+      setRegisterStatus({ msg: "All fields are required !", key: Math.random() });
     } else if (!emailCheck.test(data.email)) {
-      setRegisterStatus({ msg: "Invalid email format!", key: Math.random() });
+      setRegisterStatus({ msg: "Invalid email format !", key: Math.random() });
     } else if (data.password !== confirmPassword) {
-      setRegisterStatus({ msg: "Passwords do not match!", key: Math.random() });
+      setRegisterStatus({ msg: "Passwords do not match !", key: Math.random() });
     } else if (data.password.length < 6) {
-      setRegisterStatus({ msg: "Password must be at least 6 characters!", key: Math.random() });
+      setRegisterStatus({ msg: "Password must be at least 6 characters !", key: Math.random() });
     } else {
       try {
         const config = {
@@ -40,12 +40,16 @@ function Registration() {
         };
 
         await axios.post("http://localhost:8080/user/register", data, config);
-        setRegisterStatus({ msg: "Account created successfully! 😎", key: Math.random() });
+        setRegisterStatus({ msg: "Account created successfully! 😎", key: Math.random(), severity: 'success' });
         setTimeout(() => {
           navigate('/login');
         }, 2000); 
       } catch (err) {
-        setRegisterStatus({ msg: "Registration failed. Try again.", key: Math.random() });
+        if (err.response && err.response.data && err.response.data.message) {
+          setRegisterStatus({ msg: err.response.data.message, key: Math.random(), severity: 'error' });
+        } else {
+          setRegisterStatus({ msg: "Registration failed. Try again.", key: Math.random(), severity: 'error' });
+        }
       }
     }
   };
@@ -96,7 +100,7 @@ function Registration() {
                 <p>Already have an account? <u onClick={() => navigate('/login')}>&nbsp;&nbsp;Sign in</u></p>
               </div>
             </form>
-            {registerStatus ? (<Toaster key={registerStatus.key} message={registerStatus.msg} />) : null}
+            {registerStatus ? (<Toaster key={registerStatus.key} message={registerStatus.msg} severity={registerStatus.severity} />) : null}
           </div>
         </div>
       </div>

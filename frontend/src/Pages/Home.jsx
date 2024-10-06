@@ -75,6 +75,10 @@ function Home() {
         navigate('/login');
     };
     
+    const handleEditProfileClick = () => {
+        navigate('/edit-profile');
+    };
+
     const closeLoginPrompt = () => {
         setShowLoginPrompt(false);
     };
@@ -83,6 +87,7 @@ function Home() {
         localStorage.setItem("userStatus", false);
         localStorage.removeItem('token');
         localStorage.removeItem('userdata');
+        localStorage.removeItem('userData');
         setShowLogoutAnimation(true);
         setTimeout(() => {
             navigate('/login');
@@ -150,7 +155,7 @@ function Home() {
                                 </h2>
                                 <ul>
                                     <hr />
-                                    <li>
+                                    <li onClick={handleEditProfileClick}>
                                         <FontAwesomeIcon className="icons" icon={faPen} />
                                         <span className="edit-profile-text">Edit Profile</span>
                                     </li>

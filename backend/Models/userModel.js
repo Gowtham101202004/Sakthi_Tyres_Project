@@ -15,6 +15,14 @@ const userModel = mongoose.Schema(
       type: String,
       required: true,  
     },
+    phno:String,
+    address:String,
+    location:String,
+    fullname:String,
+    profileImage: {
+      type: String,
+      default: '',
+    },
   },
   {
     timestamps: true,

@@ -1,0 +1,30 @@
+.success-toast-container {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 1000;
+  }
+  
+  .success-toast-snackbar {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999; 
+    transform: translateX(0);
+  }
+  
+
+  @keyframes fadein {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  @keyframes fadeout {
+    from { opacity: 1; }
+    to { opacity: 0; }
+  }
+  
+  .success-toast-snackbar {
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  }
+  

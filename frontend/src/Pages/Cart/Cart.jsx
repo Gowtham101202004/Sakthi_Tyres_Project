@@ -6,6 +6,7 @@ import trash from './trash.svg';
 import buy from './buy.svg';
 import loadingAnimation from './loading.json'; 
 import axios from 'axios';
+import Payment from '../Payment/Payment'; 
 
 // company logos
 import apollo from '../../assets/Welcome/Dealers/apollo.png';
@@ -14,7 +15,8 @@ import jk from '../../assets/Welcome/Dealers/jk.png';
 
 function Cart() {
   const [cart, setCart] = useState([]);
-  const [loading, setLoading] = useState(true); 
+  const [loading, setLoading] = useState(true);
+  const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
 
   // Fetch cart items from the backend
   useEffect(() => {
@@ -51,6 +53,15 @@ function Cart() {
     }
   };
 
+  const handleBuyClick = () => {
+    setIsPaymentModalOpen(true);
+  };
+
+  // Function to close the payment modal
+  const handleClosePaymentModal = () => {
+    setIsPaymentModalOpen(false); 
+  };
+
   return (
     <div className='cart-container'>
       <div className="cart-img">
@@ -80,11 +91,10 @@ function Cart() {
                 <div className='buttons-container'>
                   <button className='remove-button'
                     onClick={() => removeFromCart(item.tyre_model, item.tyre_brand)}>
-                    {/* Remove from Cart */}
                     <img src={trash} className='trash-icon' alt="Remove"/>
                   </button>
-                  <button className='buy-button'>
-                  <img src={buy} className='buy-icon' alt="Buy"/>
+                  <button className='buy-button' onClick={handleBuyClick}> 
+                    <img src={buy} className='buy-icon' alt="Buy"/>
                   </button>
                 </div>
               </div>
@@ -92,6 +102,9 @@ function Cart() {
           ))
         )}
       </div>
+
+      {/* Render the Payment component conditionally and pass the onClose prop */}
+      {isPaymentModalOpen && <Payment onClose={handleClosePaymentModal} />} 
     </div>
   );
 }

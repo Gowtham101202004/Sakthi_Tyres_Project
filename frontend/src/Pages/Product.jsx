@@ -9,7 +9,6 @@ import apollo from '../assets/Welcome/Dealers/apollo.png';
 import bridgestone from '../assets/Welcome/Dealers/bridgestone.png';
 import jk from '../assets/Welcome/Dealers/jk.png';
 
-
 import Car from '../assets/Product/car.svg';
 import Bike from '../assets/Product/bike.svg';
 import Truck from '../assets/Product/truck.svg';
@@ -30,6 +29,7 @@ import AddShoppingCartTwoToneIcon from '@mui/icons-material/AddShoppingCartTwoTo
 import { IconButton } from '@mui/material';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 
+import Payment from './Payment/Payment';
 import { ToastContainer, toast, Bounce } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
@@ -43,13 +43,13 @@ function Product() {
   const [cart, setCart] = useState([]);
   const [Cars,setCars]=useState([]);
   const navigate = useNavigate(null);
-
+  const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
 
   useEffect(()=>{
 
     const fetch=async()=>{
       try{
-        const res=await axios.get("http://localhost:8080/user/displaycardata");
+        const res=await axios.get("http://localhost:8080/user/displaytyredata");
         console.log(res.data.Data);
         setCars(res.data.Data);
       }
@@ -95,7 +95,7 @@ function Product() {
   
       await axios.post('http://localhost:8080/user/cart', item, {
         headers: {
-          Authorization: `Bearer ${token}`,  // Make sure the token is correct
+          Authorization: `Bearer ${token}`, 
         },
       });
   
@@ -124,6 +124,14 @@ function Product() {
     }
   };
   
+  const handleBuyClick = () => {
+    setIsPaymentModalOpen(true);
+  };
+
+  // Function to close the payment modal
+  const handleClosePaymentModal = () => {
+    setIsPaymentModalOpen(false); 
+  };
 
   return (
     <>
@@ -190,7 +198,9 @@ function Product() {
                         <div className="buttons">
                           <IconButton className="add-to-cart" onClick={() => addToCart(item)} title='Add to cart'><AddShoppingCartTwoToneIcon/></IconButton>
                           <a href="#">
-                            <IconButton className="buy-now" title='Buy Now'><ShoppingCartOutlinedIcon/></IconButton>
+                            <IconButton className="buy-now" title='Buy Now' onClick={handleBuyClick}>
+                              <ShoppingCartOutlinedIcon/>
+                            </IconButton>
                           </a>
                         </div>
                       </div>
@@ -215,6 +225,8 @@ function Product() {
         pauseOnHover
         theme="dark"
       />
+            {isPaymentModalOpen && <Payment onClose={handleClosePaymentModal} />} 
+
     </>
   );
 }
