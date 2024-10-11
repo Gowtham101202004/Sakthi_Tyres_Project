@@ -238,6 +238,16 @@ const EditProfile = () => {
     // The preview state already holds the cropped image
   };
 
+  const removeProfileImage = () => {
+    setPreview(null);
+    setUserData((prevData) => ({
+      ...prevData,
+      profileImage: ''
+    }));
+    localStorage.setItem('userData', JSON.stringify({ ...JSON.parse(localStorage.getItem('userData')), data: { ...userData, profileImage: '' } }));
+    setIsImageEditorVisible(false);
+  };
+
   return (
     <>
       <Backdrop sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }} open={isLoading || isSubmitting}>
@@ -289,12 +299,15 @@ const EditProfile = () => {
               <Box className="modal-box">
                 <Avatar
                   width={390}
-                  height={295}
+                  height={300}
                   onCrop={handleAvatarCrop}
                   onBeforeFileLoad={handleAvatarBeforeFileLoad}
                   src={userData.profileImage || null}
                 />
                 <div className="image-editor-buttons">
+                  <Button onClick={removeProfileImage} variant="contained" color="error">
+                    Remove
+                  </Button>
                   <Button onClick={cancelImageEdit} className="cancel-button">
                     Cancel
                   </Button>

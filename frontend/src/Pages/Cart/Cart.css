@@ -6,6 +6,23 @@
   overflow-y: scroll;
 }
 
+.cart-container .cart-container-button {
+  margin-top: 20px;
+  margin-left: 48%;
+  margin-bottom: 10px;
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.cart-container .cart-container-button:hover {
+  background-color: #45a049;
+}
+
 .cart-img {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -61,6 +78,24 @@
   margin-bottom: 15px;
 }
 
+.cart-tire-box .price span{
+  color:black;
+}
+
+.cart-tire-box .quantity-label{
+  color: black;
+  font-weight: 700;
+  font-size: large;
+}
+
+.quantity-label .quantity-input{
+  width:40px;
+  margin-bottom: 10px;
+  padding: 5px;
+  border-radius: 10px;
+  border: 2px solid black;
+}
+
 /* .cart-tire-box .buttons {
   display: flex;
   justify-content: flex-start;
@@ -75,26 +110,34 @@
 
 .cart-tire-box .buttons-container .remove-button{
   border:none;
-  background-color: red;
+  background-color: rgb(245, 49, 49);
   border-radius: 5px;
+}
+
+.cart-tire-box .buttons-container .remove-button:hover{
+  background-color: rgb(249, 10, 10);
 }
 
 .cart-tire-box .buttons-container .trash-icon{
   width:25px;
   height: 25px;
-  padding: 10px 10px;
+  padding: 10px 20px;
 }
 
 .cart-tire-box .buttons-container .buy-button{
   border:none;
-  background-color: rgb(25, 204, 25);
+  background-color: rgb(78, 243, 78);
   border-radius: 5px;
+}
+
+.cart-tire-box .buttons-container .buy-button:hover{
+  background-color: rgb(10, 244, 10);
 }
 
 .cart-tire-box .buttons-container .buy-icon{
   width: 30px;
   height: 30px;
-  padding: 5px 7px;
+  padding: 5px 18px;
 }
 
 /* .cart-tire-box .remove-from-cart {
@@ -242,3 +285,4 @@
     margin-top: 20px !important;
   }
 }
+

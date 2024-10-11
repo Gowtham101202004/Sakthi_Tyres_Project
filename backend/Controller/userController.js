@@ -16,6 +16,10 @@ const loginController = expressAsyncHandler(async (req, res) => {
       _id: user._id,
       name: user.name,
       email: user.email,
+      isadmin: user.isadmin,
+      fullname:user.fullname,
+      location:user.location,
+      phno:user.phno,
       token: generateToken(user._id),
     });
   } else {
@@ -57,6 +61,10 @@ const registerController = expressAsyncHandler(async (req, res) => {
       _id: user._id,
       name: user.name,
       email: user.email,
+      isadmin: user.isadmin,
+      fullname:user.fullname,
+      location:user.location,
+      phno:user.phno,
       token: generateToken(user._id),
     });
   } else {

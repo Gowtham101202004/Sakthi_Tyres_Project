@@ -20,6 +20,13 @@ import Bridgestone from './Pages/Brand_About/Bridgestone';
 import JK from './Pages/Brand_About/JK';
 import Michelin from './Pages/Brand_About/Michelin';
 import Payment from './Pages/Payment/Payment'; 
+import Orders from './Pages/Orders/Orders'
+
+// Admin 
+import Admin from './Admin/Admin'
+import Dashboard from './Admin/Dashboard'
+import ManageProducts from './Admin/ManageProducts'
+import ManageUsers from './Admin/ManageUsers'
 
 // Initialize Stripe with your publishable key once
 const stripePromise = loadStripe("pk_test_51Q5g2GD7L0PMiSZDyh1Slqidawdli8iWnIGxx69koWIyfEpliXrlqPBaDqtTtiiiee6upIoioleWHdwXxZDzTvdU00LXTGyT2G");
@@ -49,7 +56,7 @@ function MainContent({ cartItems, addToCart, removeFromCart }) {
   const location = useLocation();
 
   // Show footer unless on specific pages
-  const showFooter = !['/login', '/register', '/edit-profile', '/cart', '/payment'].includes(location.pathname); 
+  const showFooter = !['/login', '/register', '/edit-profile', '/cart', '/payment','/admin','/admin/manageuser','/cart/orders'].includes(location.pathname); 
 
   return (
     <>
@@ -66,11 +73,19 @@ function MainContent({ cartItems, addToCart, removeFromCart }) {
           <Route path='bridgestone' element={<Bridgestone />} />
           <Route path='jk' element={<JK />} />
           <Route path='michelin' element={<Michelin />} />
+          <Route path='cart/orders' element={<Orders />} />
         </Route>
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Registration />} />
         <Route path='/edit-profile' element={<EditProfile />} />
         <Route path='/payment' element={<Payment />} />
+
+        <Route path="/admin" element={<Admin />}>
+          <Route index element={<Dashboard />} />
+          <Route path="manageuser" element={<ManageUsers />} />
+          <Route path="manageproduct" element={<ManageProducts />} />
+        </Route>
+
       </Routes>
       {showFooter && <Footer />} 
     </>

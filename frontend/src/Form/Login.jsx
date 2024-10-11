@@ -27,7 +27,6 @@ function Login() {
         },
       };
 
-      // Make the login request
       const res = await axios.post("http://localhost:8080/user/login", data, config);
       console.log("Login response:", res.data);
 
@@ -62,7 +61,6 @@ function Login() {
   };
 
   const handleToasterClose = () => {
-    // Only close the toaster, don't navigate unless it's a success
     if (logInStatus?.severity === 'success') {
       navigate('/');
     }

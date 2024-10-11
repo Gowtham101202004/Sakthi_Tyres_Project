@@ -1,12 +1,13 @@
-import React from 'react'
-import location from './locations.gif'
-import './Contact.css'
+import React from 'react';
+import location from './locations.gif';
+import './Contact.css';
+import { FaWhatsapp } from 'react-icons/fa'; // Importing the WhatsApp icon
 
 function Contact() {
   return (
     <>
       <div className='location-container'>
-        <img src={location} alt="location-gif"/>
+        <img src={location} alt="location-gif" />
         <h1>Our Location</h1>
       </div>
       <div className='contact-tyre-maps'>
@@ -17,11 +18,15 @@ function Contact() {
           style={{ border: 0 }}
           allowFullScreen=""
           loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade">
-        </iframe>
+          referrerPolicy="no-referrer-when-downgrade"
+        />
+      </div>
+      <div className='whatsapp-contact'>
+        <FaWhatsapp className='whatsapp-icon' />
+        <span className='whatsapp-number'>+91 9443088649</span>
       </div>
     </>
-  )
+  );
 }
 
-export default Contact
+export default Contact;

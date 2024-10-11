@@ -13,31 +13,15 @@
 }
 
 /* Payment Modal */
-.payment-modal {
+.modal-overlay .payment-modal {
     background-color: white;
     padding: 30px;
     border-radius: 8px;
-    width: 400px;
-    max-width: 100%;
+    width: auto;
+    /* max-width: 100%; */
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
     position: relative;
     animation: fadeIn 0.3s ease-in-out;
-}
-
-/* Close Button */
-.close-button-payment {
-    position: absolute;
-    width: 10px;
-    background: none;
-    border: none;
-    margin: -20px 25px 10px 375px;
-    /* padding-right: 25px;
-    padding-left: 10px;
-    padding-top: 5px;
-    padding-bottom: 2px; */
-    font-size: 45px;
-    cursor: pointer;
-    color: black;
 }
 
 .payment-form {
@@ -49,8 +33,9 @@
 }
 
 .cardholder-name-input {
-    width: 100%;
+    width: 93%;
     padding: 12px;
+    margin-top: -10px;
     margin-bottom: 15px;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -59,11 +44,11 @@
 }
 
 .cardholder-name-input::placeholder {
-    color: #736f6f;
+    color: #474444;
 }
 
 .card-info {
-    width: 100%;
+    width: 93%;
     margin-bottom: 15px;
     border: 1px solid #ccc;
     padding: 12px;
@@ -74,6 +59,7 @@
 .card-element {
     width: 100%;
 }
+  
 
 .payment-button { /* Scoped button styles */
     width: 100%;
@@ -107,3 +93,322 @@
         transform: scale(1);
     }
 }
+
+/* 
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+} */
+
+/* Payment Modal */
+.payment-modal {
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    width: 400px;
+    max-width: 100%;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Close Button */
+.modal-overlay .close-button-payment {
+    position: relative;
+    width: 10px;
+    background: none;
+    border: none;
+    margin: -20px 25px 10px 375px;
+    /* padding-right: 25px;
+    padding-left: 10px;
+    padding-top: 5px;
+    padding-bottom: 2px; */
+    font-size: 45px;
+    cursor: pointer;
+    color: black;
+}
+
+/* New Styles for Payment Options */
+
+/* Payment Options Container */
+.payment-options, .online-options {
+    padding-left: 10px;
+    padding-right: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin-top: -10px;
+}
+
+.payment-options h2{
+    color: black;
+    letter-spacing: 1px;
+}
+
+.payment-options h2 span{
+    color: rgb(241, 26, 26);
+}
+
+.online-options h2{
+    color: black;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+
+.offline-options .back-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4c5053;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.offline-options .back-button:hover {
+    background-color: #5a6268;
+}
+
+.offline-options .book-order-button { 
+    margin-bottom: 10px;
+    width: 100%;
+    padding: 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.offline-options .not-deliverable{
+    margin-top: -10px;
+    margin-left: 90px;
+    color: red;
+}
+
+.offline-options .not-deliverable span{
+    font-size: large;
+    color: black;
+}
+
+.card-payment{
+    margin-top: -30px;
+}
+
+.card-payment .back-button {
+    margin-top: 15px;
+    width: 100%;
+    padding: 10px;
+    background-color: #4c5053;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card-payment .back-button:hover {
+    background-color: #5a6268;
+}
+
+/* Option Buttons */
+.option-button {
+    width: 100%;
+    padding: 12px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.option-button:hover {
+    background-color: #218838;
+}
+
+/* Back Button */
+.online-options .back-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4c5053;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.online-options .back-button:hover {
+    background-color: #5a6268;
+}
+
+/* Gpay Section */
+
+.gpay-payment {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.gpay-qr {
+    width: 300px;
+    height: auto;
+    margin-top: -40px;
+    margin-left: 0; 
+    margin-bottom: 20px;
+    object-fit: cover;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+.gpay-payment .payment-button {
+    width: 100%;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.gpay-payment .back-button {
+    width: 100%;
+    margin-top: 15px;
+    padding: 10px;
+    background-color: #4c5053;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.gpay-payment .back-button:hover {
+    background-color: #5a6268;
+}
+
+
+/* Offline Section */
+.bill-container {
+    margin-top: -20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Bill Content */
+.bill-content {
+    position: relative;
+}
+
+/* .close-bill-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 5px 10px;
+    background-color: #dc3545;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+} */
+
+.close-bill-button:hover {
+    background-color: #c82333;
+}
+
+/* Bill Title */
+.bill-title {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333333;
+    font-weight: bold;
+}
+
+/* Bill Table */
+.bill-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.bill-table th, .bill-table td {
+    border: 1px solid #dddddd;
+    padding: 12px;
+    text-align: center;
+}
+
+.bill-table th {
+    background-color: #f2f2f2;
+    color: #333333;
+}
+
+.bill-table td{
+    color: black;
+}
+
+.bill-table td img.bill-item-image {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+/* Bill Summary */
+.bill-summary {
+    text-align: right;
+    font-size: 18px;
+    color: #333333;
+}
+
+.bill-summary 
+
+.bill-summary p {
+    margin: 5px 0;
+}
+
+.bill-summary strong {
+    color: #000000;
+}
+
+/* Payment.css */
+
+.download-button {
+    margin-top: 20px;
+    margin-left: 250px;
+    margin-bottom: 10px;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .download-button:hover {
+    background-color: #45a049;
+  }
+  

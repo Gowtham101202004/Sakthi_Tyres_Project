@@ -1,20 +1,34 @@
 import React from 'react';
+import { useEffect } from 'react';
+
 import './About.css'; 
 import Tyre from './Sakthi-tyres.png'
 import BQ from './best-quality.jpeg'
 import BP from './best-price.jpg'
 import Achievement from './achievement.jpg'
+import "aos/dist/aos.css";
+import AOS from 'aos';
 
 function About() {
+  
+  useEffect(() => {
+    AOS.init({
+      once: true,
+      disable: "phone",
+      duration: 750,
+      easing: "ease-out-cubic",
+    });
+  }, []);
+
   return (
     <div className='about-container'>
-      <div className='about-header'>
+      <div data-aos="zoom-in" className='about-header'>
         <img src={Tyre} alt='Sakthi Tyres'/>
         <p>We are dedicated to providing the best quality tires and exceptional service.</p>
       </div>
 
       <div className='about-content'>
-        <div className='about-section'>
+        <div data-aos="zoom-in-right" className='about-section'>
           <h2>Our Mission</h2>
           <img src={BQ} className='about-img' alt='Best Quality'/>
           <p>
@@ -23,7 +37,7 @@ function About() {
           </p>
         </div>
 
-        <div className='about-section'>
+        <div data-aos="zoom-in-left" className='about-section'>
           <h2>Why Choose Us?</h2>
           <img src={BP} className='about-img' alt='Best Price'/>
           <p>
@@ -33,7 +47,7 @@ function About() {
           </p>
         </div>
 
-        <div className='about-section'>
+        <div data-aos="zoom-in-right" className='about-section'>
           <h2>Our History</h2>
           <img src={Achievement} className='about-img' alt='Best Quality'/>
           <p>

@@ -10,6 +10,9 @@ import Lottie from 'react-lottie';
 import logoutAnimation from '../assets/Home/logout.json';
 import Login_Gif from '../assets/Home/Login_Animation.gif';
 import axios from 'axios';
+import DefaultProfile from './Edit_Profile/default-profile.png'
+import "aos/dist/aos.css";
+import AOS from 'aos';
 
 function Home() {
     const [isProfileDropdownVisible, setIsProfileDropdownVisible] = useState(false);
@@ -19,6 +22,16 @@ function Home() {
     const location = useLocation();
     const navigate = useNavigate();
     const [username,setUserName] = useState(null);
+    const [profileImg, setProfileImg] = useState(null);
+ 
+    useEffect(() => {
+        AOS.init({
+          once: true,
+          disable: "phone",
+          duration: 750,
+          easing: "ease-out-cubic",
+        });
+      }, []);
 
     useEffect(() => {
         const fetchCartCount = async () => {
@@ -113,11 +126,27 @@ function Home() {
             setUserName("Profile");
         }
     },[]);
+    
+    useEffect(() => {
+        if (localStorage.getItem('userData')) {
+            const userData = JSON.parse(localStorage.getItem('userData')).data;
+            if(userData.profileImage != "")
+            {
+                setProfileImg(userData.profileImage);
+            }
+            else{
+                setProfileImg(DefaultProfile);
+            }
+        } else {
+            setProfileImg(DefaultProfile);
+        }
+    }, []);
+    
 
     return (
         <>
             {showLoginPrompt && (
-                <div className='login-prompt-container'>
+                <div data-aos="zoom-in" className='login-prompt-container'>
                     <div className='login-prompt-box'>
                         <img src={Login_Gif} alt="Login_Gif" />
                         <h2>Please login to continue </h2>
@@ -150,7 +179,7 @@ function Home() {
                         {JSON.parse(localStorage.getItem("userStatus")) ? (
                             <>
                                 <h2>
-                                    <FontAwesomeIcon icon={faCircleUser} className='user-profile' />
+                                    {/* <FontAwesomeIcon icon={faCircleUser} className='user-profile' /> */}
                                     {username}
                                 </h2>
                                 <ul>
@@ -196,16 +225,22 @@ function Home() {
                             <li><NavLink className='page-link' to='about'>About Us</NavLink></li>
                             <li><NavLink className='page-link' to='contact'>Contact Us</NavLink></li>
                             <li><NavLink className='page-link' to='help'>Help</NavLink></li>
-                            <FontAwesomeIcon
+                            <img 
+                                src={profileImg} 
+                                alt="Profile" 
+                                className='profile'
+                                onClick={handleProfileClick}
+                            />
+                            {/* <FontAwesomeIcon
                                 icon={faCircleUser}
                                 className='profile'
-                                onClick={handleProfileClick} />
+                                onClick={handleProfileClick} /> */}
                         </ul>
                     </nav>
                 </div>
 
                 {/* Cart Icon */}
-                <div
+                <div 
                     className={`cart-icon-container ${isCartActive ? 'active' : ''}`}
                     onClick={handleCartClick}>
                     <FontAwesomeIcon icon={faCartShopping} className={`cart-icon ${isCartActive ? 'active-icon' : ''}`} />

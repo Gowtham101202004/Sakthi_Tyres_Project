@@ -39,6 +39,9 @@ app.get("/", (req, res) => {
 
 app.use("/user", userRoutes);
 
+const adminRouter=require("./Routes/adminRouter");
+app.use("/admin",adminRouter);
+
 // Error Handling middlewares
 app.use(notFound);
 app.use(errorHandler);

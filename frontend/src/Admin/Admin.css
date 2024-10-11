@@ -1,0 +1,79 @@
+.manage-users-container {
+    padding: 20px;
+    margin: 0 auto;
+    max-width: 1200px;
+    background-color: transparent;
+    border-radius: 10px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .manage-users-container .table-container {
+    margin-top: 20px;
+  }
+  
+  .manage-users-container h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  .MuiTableCell-head {
+    font-weight: bold;
+    background-color: #e0e0e0;
+  }
+  
+  .MuiTableCell-body {
+    background-color: #fff;
+  }
+  
+  .MuiButton-containedPrimary {
+    background-color: #1976d2;
+    color: white;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+  }
+  
+  .MuiButton-containedPrimary:hover {
+    background-color: #125a9a;
+  }
+  
+  .MuiButton-containedError {
+    background-color: #d32f2f;
+    color: white;
+    font-weight: bold;
+  }
+  
+  .MuiButton-containedError:hover {
+    background-color: #9a2121;
+  }
+  
+  .MuiIconButton-colorPrimary:hover {
+    color: #125a9a;
+  }
+  
+  .MuiIconButton-colorError:hover {
+    color: #9a2121;
+  }
+
+  .new-tyre-src{
+    width:100px;
+  }
+  
+.Dialogue-title{
+  color:black;
+}
+
+  @media only screen and (max-width: 600px) {
+    .manage-users-container {
+      padding: 10px;
+    }
+  
+    h2 {
+      font-size: 1.5em;
+    }
+  
+    .table-container {
+      margin-top: 10px;
+    }
+  }

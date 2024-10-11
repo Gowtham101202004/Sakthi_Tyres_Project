@@ -22,6 +22,8 @@ const {
   createPaymentIntent,
 } = require('../Controller/paymentController');
 
+const { createOrder, getUserOrders } = require('../Controller/orderController');
+
 const { protect } = require("../middleware/authMiddleware");
 
 const Router = express.Router();
@@ -43,5 +45,9 @@ Router.delete("/cart", protect, removeFromCart);   // Remove item from cart
 
 //Payment
 Router.post("/create-payment-intent",createPaymentIntent);
+
+Router.post("/orders", protect, createOrder);
+Router.get("/orders/:id", protect, getUserOrders);
+
 
 module.exports = Router;

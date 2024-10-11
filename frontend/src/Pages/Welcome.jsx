@@ -11,6 +11,8 @@ import JK from '../assets/Welcome/jk.jpg';
 import Tyre from '../assets/Welcome/tyre2.png';
 import Apollo_Tyre from '../assets/Welcome/Apollo_tyre.jpg';
 
+import "aos/dist/aos.css";
+import AOS from 'aos';
 
 import apollo from '../assets/Welcome/Dealers/apollo.png';
 import bridgestone from '../assets/Welcome/Dealers/bridgestone.png';
@@ -26,6 +28,15 @@ function Welcome() {
   const navigate = useNavigate();
 
   const images = [Michelin_Ads, Bridgestone_ads, JK, Apollo];
+
+  useEffect(() => {
+    AOS.init({
+      once: true,
+      disable: "phone",
+      duration: 750,
+      easing: "ease-out-cubic",
+    });
+  }, []);  
 
   const handleApolloClick = () => {
     navigate('/apollo');
@@ -53,11 +64,11 @@ function Welcome() {
 
   return (
     <>
-    <div>
+    <div data-aos="zoom-in">
       <div className='slider-container'>
         <img src={images[currentIndex]} className='slider-image' alt='Tyres' />
       </div>
-      <div className='grid-container'>
+      <div data-aos="fade-up" className='grid-container'>
         <div className='grid-item'>
           <img src={Apollo_Tyre} className='tyre-image' onClick={handleApolloClick} alt='Tyres' />
         </div>
@@ -72,7 +83,7 @@ function Welcome() {
         </div>
       </div>
       <h1 className='dealership-title'>Our Dealerships</h1>
-      <div className='dealership'>
+      <div data-aos="zoom-out" className='dealership'>
         <img src={apollo} alt='apollo'/>
         <img src={bridgestone} alt='bridgestone'/>
         <img src={continental} alt='continental'/>
@@ -83,10 +94,10 @@ function Welcome() {
       </div>
       <div className='tyre-quote-container'>
         <div className='tyre-quote'>
-          <img src={Tyre} alt='tyre'/>
-          <h1>BAD ATTITUDE</h1>
+          <img data-aos="fade-right" src={Tyre} alt='tyre'/>
+          <h1 data-aos="fade-left">BAD ATTITUDE</h1>
           <br />
-          <h2>is like a flat tyre, <br />you can't move ahead <br />until it is changed.</h2>
+          <h2 data-aos="fade-left">is like a flat tyre, <br />you can't move ahead <br />until it is changed.</h2>
         </div>
       </div>
     </div>
