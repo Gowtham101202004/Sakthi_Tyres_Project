@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useEffect, useState } from 'react'; // Importing hooks directly
 import { Outlet, Link } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
@@ -13,24 +13,25 @@ import HomeIcon from '@mui/icons-material/Home';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import PersonIcon from '@mui/icons-material/Person';
 import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
+import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Toolbar from '@mui/material/Toolbar';
 import AppBar from '@mui/material/AppBar';
 import CssBaseline from '@mui/material/CssBaseline';
-import Avatar from '@mui/material/Avatar'; // For profile picture
-import './Admin.css'; // Import custom CSS
+import Avatar from '@mui/material/Avatar'; 
+import './Admin.css';
 
 const drawerWidth = 240;
 
 const Admin = () => {
-  const [mobileOpen, setMobileOpen] = React.useState(false);
-  const [adminData, setAdminData] = React.useState({});
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [adminData, setAdminData] = useState({});
 
-  React.useEffect(() => {
-    const storedData = localStorage.getItem("userData");
+  useEffect(() => {
+    const storedData = localStorage.getItem("userdata"); // Use 'userdata' instead of 'userData'
     if (storedData) {
-      const data = JSON.parse(storedData).data;
+      const data = JSON.parse(storedData);
       setAdminData(data);
     }
   }, []);
@@ -61,15 +62,15 @@ const Admin = () => {
           textAlign: 'center',
         }}
       >
-        {adminData.name ? (
+        {adminData.fullname ? (  // Accessing 'fullname' instead of 'name'
           <>
             <Avatar
-              alt={adminData.name.toUpperCase()}
-              src={adminData.name.charAt(0).toUpperCase()}
+              alt={adminData.fullname.toUpperCase()}
+              src={adminData.fullname.charAt(0).toUpperCase()} // Use 'fullname' for avatar
               sx={{ width: 50, height: 50, marginBottom: '8px' }}
             />
             <Typography variant="h6" color="white">
-              {adminData.name}
+              {adminData.fullname}
             </Typography>
             <Typography variant="body2" color="rgb(230, 230, 230)">
               {adminData.email}
@@ -106,6 +107,14 @@ const Admin = () => {
               <WorkspacePremiumIcon />
             </ListItemIcon>
             <ListItemText primary={"Manage Products"} />
+          </ListItemButton>
+        </ListItem>
+        <ListItem disablePadding>
+          <ListItemButton component={Link} to="manageorder">
+            <ListItemIcon sx={{ color: 'white' }}>
+              <LocalShippingIcon /> 
+            </ListItemIcon>
+            <ListItemText primary={"Manage Orders"} />
           </ListItemButton>
         </ListItem>
       </List>

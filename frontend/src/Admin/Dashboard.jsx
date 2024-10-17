@@ -8,8 +8,7 @@ import axios from 'axios';
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, ArcElement, Title, Tooltip, Legend);
 
 const Dashboard = () => {
-    const [dataCount, setDataCount] = useState({ usercount: 0, tyrecount: 0});
-    // const [dataCount, setDataCount] = useState({ usercount: 0, productcount: 0, ordercount: 0 });
+    const [dataCount, setDataCount] = useState({ usercount: 0, tyrecount: 0, ordercount: 0});
 
     useEffect(() => {
         const fetchData = async () => {
@@ -61,11 +60,11 @@ const Dashboard = () => {
 
     // Data for the pie chart (Overview)
     const pieData = {
-        labels: ['Users', 'Products'],
+        labels: ['Users', 'Products', 'Orders'],
         datasets: [
             {
                 label: 'Count',
-                data: [dataCount.usercount, dataCount.tyrecount],
+                data: [dataCount.usercount, dataCount.tyrecount, dataCount.ordercount],
                 backgroundColor: ['#36A2EB', '#FF6384', '#FFCE56'],
                 hoverBackgroundColor: ['#36A2EB', '#FF6384', '#FFCE56'],
             },
@@ -114,7 +113,7 @@ const Dashboard = () => {
                         </CardContent>
                     </Card>
                 </Grid>
-                {/* <Grid item xs={12} sm={4}>
+                <Grid item xs={12} sm={4}>
                     <Card>
                         <CardContent>
                             <Typography variant="h5" component="div" align="center">
@@ -125,7 +124,7 @@ const Dashboard = () => {
                             </Typography>
                         </CardContent>
                     </Card>
-                </Grid> */}
+                </Grid>
             </Grid>
 
             {/* Charts */}

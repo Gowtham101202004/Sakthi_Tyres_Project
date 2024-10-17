@@ -8,7 +8,6 @@ import loadingAnimation from './loading.json';
 import axios from 'axios';
 import Payment from '../Payment/Payment'; 
 
-// Company logos
 import apollo from '../../assets/Welcome/Dealers/apollo.png';
 import bridgestone from '../../assets/Welcome/Dealers/bridgestone.png';
 import jk from '../../assets/Welcome/Dealers/jk.png';
@@ -26,7 +25,6 @@ function Cart() {
   };
   
   handleOrderClick
-  // Fetch cart items from the backend
   useEffect(() => {
     const fetchCart = async () => {
       try {
@@ -85,13 +83,11 @@ function Cart() {
     setIsPaymentModalOpen(true);
   };
 
-  // Function to close the payment modal
   const handleClosePaymentModal = () => {
     setIsPaymentModalOpen(false); 
     setSelectedItems([]);
   };
 
-  // Function to handle successful payment and generate bill
   const handlePaymentSuccess = (bill) => {
     setCart(cart.filter(cartItem => !(cartItem.tyre_model === bill.items[0].tyre_model && cartItem.tyre_brand === bill.items[0].tyre_brand)));
     alert("Payment successful! Bill has been generated.");
@@ -116,7 +112,7 @@ function Cart() {
         ) : (
           cart.map(item => {
             const { numericPrice, quantity } = item;
-            const totalPrice = Math.round(numericPrice * quantity); // Round to nearest integer
+            const totalPrice = Math.round(numericPrice * quantity); 
             return (
               <div className="cart-tire-box" key={`${item.tyre_model}-${item.tyre_brand}`}>
                 <img src={item.image} alt={item.tyre_model} />

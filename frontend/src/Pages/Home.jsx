@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleUser, faCartShopping, faArrowRightFromBracket, faPen, faGear, faCircleQuestion } from '@fortawesome/free-solid-svg-icons';
+import { faCircleUser, faCartShopping, faArrowRightFromBracket, faPen, faUserTie, faCircleQuestion } from '@fortawesome/free-solid-svg-icons';
 import './myStyle.css';
 import Sakthi from '../assets/Sakthi.png';
 import { NavLink, BrowserRouter as Router, useNavigate, useLocation } from 'react-router-dom';
@@ -21,8 +21,9 @@ function Home() {
     const [showLogoutAnimation, setShowLogoutAnimation] = useState(false);
     const location = useLocation();
     const navigate = useNavigate();
-    const [username,setUserName] = useState(null);
+    const [username, setUserName] = useState(null);
     const [profileImg, setProfileImg] = useState(null);
+    const [isAdmin, setIsAdmin] = useState(false); // New state for admin status
  
     useEffect(() => {
         AOS.init({
@@ -91,7 +92,10 @@ function Home() {
     const handleEditProfileClick = () => {
         navigate('/edit-profile');
     };
-
+    
+    const handleAdminClick = () => {
+        navigate('/admin');
+    };
     const closeLoginPrompt = () => {
         setShowLoginPrompt(false);
     };
@@ -119,22 +123,22 @@ function Home() {
         }
     };
 
-    useEffect(()=>{
-        if(localStorage.getItem('userdata')){
-            setUserName(JSON.parse(localStorage.getItem('userdata')).name);
+    useEffect(() => {
+        if (localStorage.getItem('userdata')) {
+            const userdata = JSON.parse(localStorage.getItem('userdata'));
+            setUserName(userdata.name);
+            setIsAdmin(userdata.isadmin); // Set admin status from userdata
         } else {
             setUserName("Profile");
         }
-    },[]);
-    
+    }, []);
+
     useEffect(() => {
         if (localStorage.getItem('userData')) {
             const userData = JSON.parse(localStorage.getItem('userData')).data;
-            if(userData.profileImage != "")
-            {
+            if (userData.profileImage !== "") {
                 setProfileImg(userData.profileImage);
-            }
-            else{
+            } else {
                 setProfileImg(DefaultProfile);
             }
         } else {
@@ -142,7 +146,6 @@ function Home() {
         }
     }, []);
     
-
     return (
         <>
             {showLoginPrompt && (
@@ -175,15 +178,21 @@ function Home() {
                 </div>
 
                 {isProfileDropdownVisible && (
-                    <div className='dropDownProfile'>
+                    <div className={`dropDownProfile ${isAdmin ? 'admin-profile' : 'user-profile'}`}>
                         {JSON.parse(localStorage.getItem("userStatus")) ? (
                             <>
                                 <h2>
-                                    {/* <FontAwesomeIcon icon={faCircleUser} className='user-profile' /> */}
                                     {username}
                                 </h2>
                                 <ul>
                                     <hr />
+                                    {/* Admin condition added */}
+                                    {isAdmin && (
+                                        <li onClick={handleAdminClick}>
+                                            <FontAwesomeIcon className="icons" icon={faUserTie} />
+                                            <span className="edit-profile-text">Admin Panel</span>
+                                        </li>
+                                    )}
                                     <li onClick={handleEditProfileClick}>
                                         <FontAwesomeIcon className="icons" icon={faPen} />
                                         <span className="edit-profile-text">Edit Profile</span>

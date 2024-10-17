@@ -27,6 +27,7 @@ import Admin from './Admin/Admin'
 import Dashboard from './Admin/Dashboard'
 import ManageProducts from './Admin/ManageProducts'
 import ManageUsers from './Admin/ManageUsers'
+import ManageOrders from './Admin/ManageOrders'
 
 // Initialize Stripe with your publishable key once
 const stripePromise = loadStripe("pk_test_51Q5g2GD7L0PMiSZDyh1Slqidawdli8iWnIGxx69koWIyfEpliXrlqPBaDqtTtiiiee6upIoioleWHdwXxZDzTvdU00LXTGyT2G");
@@ -56,7 +57,7 @@ function MainContent({ cartItems, addToCart, removeFromCart }) {
   const location = useLocation();
 
   // Show footer unless on specific pages
-  const showFooter = !['/login', '/register', '/edit-profile', '/cart', '/payment','/admin','/admin/manageuser','/cart/orders'].includes(location.pathname); 
+  const showFooter = !['/login', '/register', '/edit-profile', '/cart', '/payment', '/admin', '/admin/manageuser', '/admin/manageproduct', '/admin/manageorder', '/cart/orders'].includes(location.pathname); 
 
   return (
     <>
@@ -84,6 +85,7 @@ function MainContent({ cartItems, addToCart, removeFromCart }) {
           <Route index element={<Dashboard />} />
           <Route path="manageuser" element={<ManageUsers />} />
           <Route path="manageproduct" element={<ManageProducts />} />
+          <Route path="manageorder" element={<ManageOrders />} />
         </Route>
 
       </Routes>

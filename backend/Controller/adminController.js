@@ -1,5 +1,6 @@
 const { tyreModel } = require("../Models/tyreModel");
 const User = require("../Models/userModel");
+const { orderModel } = require("../Models/orderModel");
 const expressAsyncHandler = require("express-async-handler");
 
 // Count Users and Tyres
@@ -8,8 +9,9 @@ const countUsersAndTyres = expressAsyncHandler(async (req, res) => {
     try {
         const usercount = await User.countDocuments();
         const tyrecount = await tyreModel.countDocuments();
-
-        return res.status(200).json({ message: "Count fetched!", data: { usercount:usercount, tyrecount:tyrecount }});
+        const ordercount = await orderModel.countDocuments();
+        console.log(`Users: ${usercount}, Tyres: ${tyrecount}, Orders: ${ordercount}`);
+        return res.status(200).json({ message: "Count fetched!", data: { usercount:usercount, tyrecount:tyrecount, ordercount:ordercount }});
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
@@ -31,23 +33,33 @@ const allUsersData = expressAsyncHandler(async (req, res) => {
 
 // Update User Data
 const findIdAndUpdatePassword = expressAsyncHandler(async (req, res) => {
+    console.log("Updated ID -> ", req.params.id);
     console.log("Updated User ID & password by ADMIN");
-    const { id } = req.params;
-    const { name, email, newPassword, isAdmin } = req.body;
+    // const { id } = req.params;
+    const { name, email, newPassword, isadmin } = req.body;
+    if (!newPassword || newPassword.length < 8) {
+        return res.status(400).json({ message: "Password must be at least 8 characters long." });
+    }
+
     try {
-        const updateData = { name, email, isAdmin };
-        if (newPassword) {
-            updateData.password = newPassword;
-        }
-        const user = await User.findByIdAndUpdate(id, updateData, { new: true });
+        const user = await User.findById(req.params.id);
         if (!user) {
             return res.status(404).json({ message: "User not found" });
         }
-        return res.status(200).json({ message: "User updated successfully", data: user });
+
+        user.name=name;
+        user.email=email;
+        user.password = newPassword;
+        user.isadmin=isadmin;
+        await user.save();
+
+        res.status(200).json({ message: `User ${user.name}'s data updated!` });
     } catch (err) {
-        res.status(500).json({ message: err.message });
+        console.error(err);
+        res.status(500).json({ message: "Server error, please try again later." });
     }
 });
+
 
 // Delete User by ID
 const deleteUserById = expressAsyncHandler(async (req, res) => {
@@ -79,7 +91,7 @@ const allTyresData = expressAsyncHandler(async (req, res) => {
 // Update Tyre Data
 const findTyreAndUpdate = expressAsyncHandler(async (req, res) => {
     console.log("Updated Tyre ID -> ", req.params.id);
-    const { brand, size, price, available } = req.body;
+    const { image, vehicle_type, vehicle_brand, vehicle_model, tyre_brand, tyre_model, tyre_size, price } = req.body;
 
     try {
         const tyre = await tyreModel.findById(req.params.id);
@@ -88,10 +100,14 @@ const findTyreAndUpdate = expressAsyncHandler(async (req, res) => {
         }
 
         // Update the tyre details
-        tyre.brand = brand;
-        tyre.size = size;
+        tyre.image = image;
+        tyre.vehicle_type = vehicle_type;
+        tyre.vehicle_brand = vehicle_brand;
+        tyre.vehicle_model = vehicle_model;
+        tyre.brand = tyre_brand;
+        tyre.model = tyre_model;
+        tyre.size = tyre_size;
         tyre.price = price;
-        tyre.available = available;
         await tyre.save();
 
         res.status(200).json({ message: `Tyre ${tyre.brand} updated!` });
@@ -129,6 +145,20 @@ const deleteTyreById = expressAsyncHandler(async (req, res) => {
     }
 });
 
+// Fetch All Orders Data
+const allOrdersData = expressAsyncHandler(async (req, res) => {
+    console.log("Order data fetched by ADMIN");
+    try {
+        const orders = await orderModel.find();
+        if (!orders || orders.length === 0) {
+            return res.status(404).json({ message: "No orders found" });
+        }
+        return res.status(200).json({ message: "Order data fetched!", data: orders });
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+});
+
 module.exports = {
     countUsersAndTyres,
     allUsersData,
@@ -138,4 +168,5 @@ module.exports = {
     findTyreAndUpdate,
     addTyres,
     deleteTyreById,
+    allOrdersData,
 };

@@ -131,11 +131,19 @@ body {
     right: 0.5rem;
     width: 190px;
     min-height: 50px;
-    max-height: 205px;
+    /* max-height: 205px; */
     padding: 10px;
     border-radius: 10px;
     background-color: white;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.9);
+}
+
+.admin-profile {
+    max-height: 250px;
+}
+
+.user-profile {
+    max-height: 205px;
 }
 
 .dropDownProfile h2 {

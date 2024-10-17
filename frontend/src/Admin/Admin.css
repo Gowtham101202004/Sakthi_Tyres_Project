@@ -64,6 +64,35 @@
   color:black;
 }
 
+.add-tyre-toggle {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  margin-bottom: 15px;
+}
+
+.add-tyre-toggle .MuiIconButton-root {
+  margin-right: 10px;
+}
+
+/* Add tyre section styling */
+.add-tyre-section {
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  position: relative; /* To position the close icon */
+}
+
+/* Header inside add tyre section for the close icon */
+.add-tyre-header {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+}
+
+
+
   @media only screen and (max-width: 600px) {
     .manage-users-container {
       padding: 10px;

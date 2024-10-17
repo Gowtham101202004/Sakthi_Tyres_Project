@@ -10,22 +10,21 @@ import axios from "axios";
 import ErrorToast from '../Form/Toaster';
 import SuccessToast from '../Form/SuccessToast';
 
-const ManageUsers = () => {
-  const [users, setUsers] = useState([]);
+const ManageOrders = () => {
+  const [orders, setOrders] = useState([]);
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
   const [openEditDialog, setOpenEditDialog] = useState(false);
-  const [selectedUser, setSelectedUser] = useState(null);
-  const [password, setPassword] = useState(""); 
+  const [selectedOrder, setSelectedOrder] = useState(null);
   const [toastMessage, setToastMessage] = useState("");
   const [toastType, setToastType] = useState(""); // 'success' or 'error'
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get("http://localhost:8080/admin/get-all-users-data");
-        setUsers(res.data.data);
+        const res = await axios.get("http://localhost:8080/admin/all-orders-data");
+        setOrders(res.data.data);
       } catch (err) {
-        setToastMessage("Error fetching users data.");
+        setToastMessage("Error fetching orders data.");
         setToastType("error");
         console.log(err.response);
       }
@@ -42,46 +41,41 @@ const ManageUsers = () => {
     }, 3000); // Hide toast after 3 seconds
   };
 
-  const handleDeleteClick = (user) => {
-    setSelectedUser(user);
+  const handleDeleteClick = (order) => {
+    setSelectedOrder(order);
     setOpenDeleteDialog(true);
   };
 
   const handleConfirmDelete = async () => {
     try {
-      await axios.delete(`http://localhost:8080/admin/delete-user/${selectedUser._id}`);
-      setUsers(users.filter((user) => user._id !== selectedUser._id));
-      showToast(`User ${selectedUser.name} deleted successfully.`, "success");
+      await axios.delete(`http://localhost:8080/admin/delete-order/${selectedOrder._id}`);
+      setOrders(orders.filter((order) => order._id !== selectedOrder._id));
+      showToast(`Order ${selectedOrder._id} deleted successfully.`, "success");
     } catch (err) {
-      showToast("Error deleting user.", "error");
+      showToast("Error deleting order.", "error");
       console.log(err.response);
     } finally {
       setOpenDeleteDialog(false);
     }
   };
 
-  const handleEditClick = (user) => {
-    setSelectedUser(user);
+  const handleEditClick = (order) => {
+    setSelectedOrder(order);
     setOpenEditDialog(true);
   };
 
-  const handleUpdateUser = async () => {
-    const updatedUser = {
-      ...selectedUser,
-      password: password ? password : selectedUser.password,
-    };
-
+  const handleUpdateOrder = async () => {
     try {
-      await axios.put(`http://localhost:8080/admin/update-user/${updatedUser._id}`, {
-        name: updatedUser.name,
-        email: updatedUser.email,
-        newPassword: updatedUser.password,
-        isadmin: updatedUser.isadmin,
+      await axios.put(`http://localhost:8080/admin/update-order/${selectedOrder._id}`, {
+        items: selectedOrder.items,
+        totalPrice: selectedOrder.totalPrice,
+        paymentType: selectedOrder.paymentType,
+        paymentMethod: selectedOrder.paymentMethod,
       });
-      setUsers(users.map((user) => (user._id === updatedUser._id ? updatedUser : user)));
-      showToast(`User ${updatedUser.name} updated successfully.`, "success");
+      setOrders(orders.map((order) => (order._id === selectedOrder._id ? selectedOrder : order)));
+      showToast(`Order ${selectedOrder._id} updated successfully.`, "success");
     } catch (err) {
-      showToast("Error updating user.", "error");
+      showToast("Error updating order.", "error");
       console.log(err.response);
     } finally {
       setOpenEditDialog(false);
@@ -90,31 +84,33 @@ const ManageUsers = () => {
 
   return (
     <>
-      <div className="manage-users-container">
-        <h2>Manage Users</h2>
+      <div className="manage-orders-container">
+        <h2>Manage Orders</h2>
 
-        {/* Users Table */}
+        {/* Orders Table */}
         <TableContainer component={Paper} className="table-container">
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell>Name</TableCell>
-                <TableCell>Email</TableCell>
-                <TableCell>Role</TableCell>
+                <TableCell>Order ID</TableCell>
+                <TableCell>User ID</TableCell>
+                <TableCell>Total Price</TableCell>
+                <TableCell>Payment Type</TableCell>
                 <TableCell>Actions</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {users.map((user) => (
-                <TableRow key={user._id} style={{ backgroundColor: user.isadmin ? 'rgba(144,238,144,0.3)' : 'transparent' }}>
-                  <TableCell>{user.name}</TableCell>
-                  <TableCell>{user.email}</TableCell>
-                  <TableCell>{user.isadmin ? "Admin" : "User"}</TableCell>
+              {orders.map((order) => (
+                <TableRow key={order._id}>
+                  <TableCell>{order._id}</TableCell>
+                  <TableCell>{order.userId}</TableCell>
+                  <TableCell>{order.totalPrice}</TableCell>
+                  <TableCell>{order.paymentType}</TableCell>
                   <TableCell>
-                    <IconButton color="primary" onClick={() => handleEditClick(user)}>
+                    <IconButton color="primary" onClick={() => handleEditClick(order)}>
                       <Edit />
                     </IconButton>
-                    <IconButton color="error" onClick={() => handleDeleteClick(user)}>
+                    <IconButton color="error" onClick={() => handleDeleteClick(order)}>
                       <Delete />
                     </IconButton>
                   </TableCell>
@@ -131,14 +127,14 @@ const ManageUsers = () => {
           PaperProps={{ style: { borderRadius: 15 } }} // Added border-radius
         >
           <DialogTitle>Confirm Delete</DialogTitle>
-          <DialogContent>Are you sure you want to delete <b>{selectedUser?.name}</b>?</DialogContent>
+          <DialogContent>Are you sure you want to delete order <b>{selectedOrder?._id}</b>?</DialogContent>
           <DialogActions>
             <Button onClick={() => setOpenDeleteDialog(false)}>Cancel</Button>
             <Button onClick={handleConfirmDelete} color="error">Delete</Button>
           </DialogActions>
         </Dialog>
 
-        {/* Edit User Dialog */}
+        {/* Edit Order Dialog */}
         <Dialog
           open={openEditDialog}
           onClose={() => setOpenEditDialog(false)}
@@ -146,58 +142,47 @@ const ManageUsers = () => {
           fullWidth
           PaperProps={{ style: { borderRadius: 15 } }} // Added border-radius
         >
-          <DialogTitle>Edit User</DialogTitle>
+          <DialogTitle>Edit Order</DialogTitle>
           <Divider />
           <DialogContent>
             <Grid container spacing={3}>
               <Grid item xs={12}>
                 <TextField
-                  label="Name"
+                  label="Order ID"
                   fullWidth
                   disabled
-                  value={selectedUser?.name || ""}
-                  onChange={(e) => setSelectedUser({ ...selectedUser, name: e.target.value })}
+                  value={selectedOrder?._id || ""}
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                  label="Email"
+                  label="User ID"
                   fullWidth
                   disabled
-                  value={selectedUser?.email || ""}
-                  onChange={(e) => setSelectedUser({ ...selectedUser, email: e.target.value })}
+                  value={selectedOrder?.userId || ""}
                 />
               </Grid>
               <Grid item xs={12}>
-                {/* Role Dropdown Menu */}
-                <FormControl fullWidth>
-                  <InputLabel id="role-label">Role</InputLabel>
-                  <Select
-                    labelId="role-label"
-                    value={selectedUser?.isadmin ? "Admin" : "User"}
-                    label="Role"
-                    onChange={(e) => setSelectedUser({ ...selectedUser, isadmin: e.target.value === "Admin" })}
-                  >
-                    <MenuItem value="User">User</MenuItem>
-                    <MenuItem value="Admin">Admin</MenuItem>
-                  </Select>
-                </FormControl>
+                <TextField
+                  label="Total Price"
+                  fullWidth
+                  value={selectedOrder?.totalPrice || ""}
+                  onChange={(e) => setSelectedOrder({ ...selectedOrder, totalPrice: e.target.value })}
+                />
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                  label="Change Password"
-                  type="password"
+                  label="Payment Type"
                   fullWidth
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="Leave empty to keep the current password"
+                  value={selectedOrder?.paymentType || ""}
+                  onChange={(e) => setSelectedOrder({ ...selectedOrder, paymentType: e.target.value })}
                 />
               </Grid>
             </Grid>
           </DialogContent>
           <DialogActions>
             <Button onClick={() => setOpenEditDialog(false)}>Cancel</Button>
-            <Button onClick={handleUpdateUser} color="primary">Update</Button>
+            <Button onClick={handleUpdateOrder} color="primary">Update</Button>
           </DialogActions>
         </Dialog>
       </div>
@@ -214,4 +199,4 @@ const ManageUsers = () => {
   );
 };
 
-export default ManageUsers;
+export default ManageOrders;

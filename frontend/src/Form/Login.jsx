@@ -11,6 +11,7 @@ function Login() {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState({ name: "", password: "" });
   const [logInStatus, setLogInStatus] = useState(null);
+  const [isAdmin, setIsAdmin] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -30,20 +31,30 @@ function Login() {
       const res = await axios.post("http://localhost:8080/user/login", data, config);
       console.log("Login response:", res.data);
 
-      // Store the token in localStorage
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("userdata", JSON.stringify(res.data));
       localStorage.setItem("userStatus", "true");
+      localStorage.setItem("isAdmin", res.data.isadmin);
 
+      setIsAdmin(res.data.isadmin);
       setLogInStatus({ msg: "Login Successful! 😎", key: Math.random(), severity: "success" });
 
+      // Only navigate after showing toast and waiting for 2 seconds
       setTimeout(() => {
-        navigate('/');
-      }, 2000); 
+        if (res.data.isadmin) {
+          navigate('/admin'); // Admin navigation
+        } else {
+          navigate('/'); // Regular user navigation
+        }
+      }, 2000);
 
     } catch (err) {
       console.error("Axios Error -> ", err.response ? err.response.data : err.message);
-      setLogInStatus({ msg: err.response ? err.response.data.message : "Invalid username or password. Please try again.", key: Math.random(), severity: "error" });
+      setLogInStatus({
+        msg: err.response ? err.response.data.message : "Invalid username or password. Please try again.",
+        key: Math.random(),
+        severity: "error"
+      });
     } finally {
       setLoading(false);
     }
@@ -62,7 +73,6 @@ function Login() {
 
   const handleToasterClose = () => {
     if (logInStatus?.severity === 'success') {
-      navigate('/');
     }
   };
 
@@ -72,7 +82,7 @@ function Login() {
         <div className="container">
           <div className="left">
             <div className='back-button' onClick={() => navigate('/')}>
-                <FontAwesomeIcon icon={faArrowLeft} className='left-arrow'/>
+              <FontAwesomeIcon icon={faArrowLeft} className='left-arrow' />
             </div>
             <img className="bg" src={left} alt="Background" />
             <div className="logo">
@@ -101,7 +111,7 @@ function Login() {
                 <div className="links">
                   <a href="#">Forgot Password?</a>
                 </div>
-                <input type="submit" value="Sign in" disabled={loading}/>
+                <input type="submit" value="Sign in" disabled={loading} />
                 <div className='last'>
                   <p>Don't have an account?<u onClick={() => navigate('/register')}>&nbsp;&nbsp;Sign up</u></p>
                 </div>
